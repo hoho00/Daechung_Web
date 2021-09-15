@@ -1,22 +1,20 @@
+import {useState, useEffect} from 'react'
 import KkoMap from './components/map/KKO_Map'
 import Location from './components/search/Location'
 import Report from './components/report/Report'
 import Type from './components/search/Type'
-
  
 import {Row} from 'reactstrap';
+import SearchBar from './components/search/SearchBar'
 
 function App() {
-  
-
+  const [local_, setLocal] = useState("");
+  const [type_, setType] = useState("");
+  const [startDate_, setStartDate] = useState("");
+  const [endDate_, setEndDate] = useState("");
   return (
     <div style={con_style}>
-      
-      <Row>
-        <div style={loc}><Location /></div>
-        <div style={type}><Type /></div>
-        <div style={cal}></div>
-      </Row>
+      <SearchBar />
       <Row style={row_Down}>
         <div style={reportList}><Report /></div>
         <div style={maps}><KkoMap /></div>

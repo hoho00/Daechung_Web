@@ -2,15 +2,44 @@ import { Container, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function Location(props) {
- 
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+export default function Location(props) {
+  const classes = useStyles();
+  const [local, setLocal] = useState('');
+  const handleChange = (event) => {
+    setLocal(event.target.value);
+  }
+  
   return (
-    <div>
-        <div style={site}>권역</div>
-        <select style={siteSelect}>
-            <option value=""></option>
-        </select>
+    <div style={props.style}>
+        <FormControl className={classes.formControl}>
+        {/* <InputLabel id="demo-simple-select-label">지역</InputLabel> */}
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={local}
+          onChange={handleChange}
+        >
+          <MenuItem value={'전체'}>전체</MenuItem>
+          <MenuItem value={'문의'}>문의</MenuItem>
+          <MenuItem value={'군북1'}>군북1</MenuItem>
+        </Select>
+      </FormControl>
     </div>
   );
 }
