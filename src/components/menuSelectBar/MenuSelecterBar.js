@@ -37,14 +37,11 @@ const MenuSelecterBar = (props) => {
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
-              <Tab label="Item One" value="1" onClick={() => history.push("/home/map_page")}/>
-              <Tab label="Item Two" value="2" onClick={() => history.push("/home/data_organize")}/>
-              <Tab label="Item Three" value="3" onClick={() => history.push("/home/account_manage")}/>
+              <Tab label="지도화면" value="1" onClick={() => history.push("/home/map_page")}/>
+              <Tab label="데이터 정리" value="2" onClick={() => history.push("/home/data_organize")}/>
+              <Tab label="계정 관리" value="3" onClick={() => history.push("/home/account_manage")}/>
             </TabList>
           </Box>
-          <TabPanel value="1"></TabPanel>
-          <TabPanel value="2"></TabPanel>
-          <TabPanel value="3"></TabPanel>
         </TabContext>
       </Box>
     </div>
