@@ -1,50 +1,39 @@
-import { Container, Row, Col } from 'reactstrap';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Grid from "@mui/material/Grid"
 
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import { Grid } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
 
 export default function Type(props) {
-  const classes = useStyles();
-  const [type, setType] = useState('');
+  const [type, setType] = useState("전체");
+
   const handleChange = (event) => {
     setType(event.target.value);
-  }
+  };
   return (
-    <Grid container className={classes.root} spacing={2}>
-      <Grid item xs={12}>
-        <Grid container justifyContent="center" spacing={3}>
-        <FormControl className={classes.formControl}>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={type}
-          onChange={handleChange}
-        >
-          <MenuItem value={'전체'}>전체</MenuItem>
-          <MenuItem value={'문의'}>문의</MenuItem>
-          <MenuItem value={'군북1'}>군북1</MenuItem>
-        </Select>
-      </FormControl>
-      </Grid>
-      </Grid>
-    </Grid>
+    <div style={props.style}>
+      <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="demo-simple-select-filled-label">항목</InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={type}
+            onChange={handleChange}
+          >
+            <MenuItem value="전체">
+              <em>전체</em>
+            </MenuItem>
+            <MenuItem value={"녹조"}>녹조</MenuItem>
+            <MenuItem value={"부유물"}>부유물</MenuItem>
+            <MenuItem value={"방치 쓰레기"}>방치 쓰레기</MenuItem>
+            <MenuItem value={"낚시/행랑객 계도"}>낚시/행랑객 계도</MenuItem>
+            <MenuItem value={"기타사항"}>기타사항</MenuItem>
+          </Select>
+        </FormControl>
+    </div>
   );
 }
 
