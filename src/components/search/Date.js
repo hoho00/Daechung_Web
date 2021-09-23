@@ -5,7 +5,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { Grid } from "@mui/material";
 
-const DateSearching = () => {
+const DateSearching = (props) => {
   const startDay = new Date();
   const endDay = new Date();
   startDay.setMonth(startDay.getMonth() - 1);

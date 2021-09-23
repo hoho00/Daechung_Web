@@ -9,16 +9,16 @@ import Header from "./Header";
 const Body = () => {
   return (
     <div>
-        <Header />
+      <Header />
       <div>
-        <MenuSelecterBar/>
+        <MenuSelecterBar />
       </div>
       <div>
         <Route exact path="/home/map_page" component={MapPage} />
         <Route path="/home/data_organize" component={DataOrganizePage} />
         <Route path="/home/account_manage" component={AccountManagePage} />
       </div>
-      
+
       <Footer />
     </div>
   );

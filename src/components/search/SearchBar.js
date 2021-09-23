@@ -1,11 +1,6 @@
-import { useState, useEffect } from "react";
 import Location from "./Location";
 import Type from "./Type";
 import DateSearching from "./Date";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid"
 
 const SearchBar = () => {
