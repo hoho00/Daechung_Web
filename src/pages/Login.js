@@ -11,8 +11,6 @@ import styles from '../components/css/styles.css'
 const Login = () => {
 
   const history = useHistory();
-  const defaultState = getDefaultState();
-  console.log("login : ", defaultState);
   return (
     <div style={{ backgroundColor: 'grey', height: '100vh', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
       {/* <Header /> */}
