@@ -12,6 +12,8 @@ export default function Report(props) {
         setDatas(response.data.data);
       } catch (e) {
         console.log(e);
+        console.log(e);
+        console.log(e);
       }
     };
 
