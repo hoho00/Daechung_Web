@@ -14,12 +14,14 @@ const MapPage = () => {
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
-  },[local_, type_, startDate_, endDate_])
+  }, [local_, type_, startDate_, endDate_])
   return (
     <div>
       <div>
-        <SearchBar settingLocal={setLocal} settingType={setType} settingStartDate={setStartDate} settingEndDate={setEndDate}/>
-        <Map searchResult = {searchResult}/>
+        <SearchBar settingLocal={setLocal} settingType={setType} settingStartDate={setStartDate} settingEndDate={setEndDate} />
+        {/* <Map searchResult = {searchResult}/> */}
+        {/* 맵 */}
+        <div style={{ width: "1326px", height: "769px", backgroundColor: "yellow" }}></div>
       </div>
     </div>
   );
