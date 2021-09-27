@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
-import Type from "./Type";
+import { useState} from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Grid from "@mui/material/Grid"
 
 
 
-export default function Location(props) {
+const Location = (props) => {
   const [location, setLocation] = useState("전체");
 
   const handleChange = (event) => {
     setLocation(event.target.value);
+    props.setting(event.target.value);
   };
   return (
     <div style={props.style}>
@@ -23,6 +22,7 @@ export default function Location(props) {
             id="demo-simple-select-filled"
             value={location}
             onChange={handleChange}
+            //onClick={handleChange}
           >
             <MenuItem value="전체">
               <em>전체</em>
@@ -45,23 +45,4 @@ export default function Location(props) {
   );
 }
 
-const site = {
-    width: "74px",
-    height: "33px",
-    textAlign: "center",
-    font: "normal normal normal 16px/19px NanumGothic",
-    letterSpacing: "0px",
-    paddingTop: "7px",
-    borderRight: "1px solid #5D5D5D",
-    float: "left"
-}
-
-const siteSelect = {
-    width: "90px",
-    height: "33px",
-    textAlign: "center",
-    font: "normal normal normal 16px/19px NanumGothic",
-    letterSpacing: "0px",
-    paddingTop: "7px",
-    float: "left"
-}
+export default Location;

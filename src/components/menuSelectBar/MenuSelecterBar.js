@@ -1,57 +1,23 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
+import { getDefaultState } from "../../common/functions/getDefaultState";
 
 const MenuSelecterBar = (props) => {
-  function leftPad(value) {
-    if (value >= 10) {
-      return value;
-    }
-    return `0${value}`;
-  }
-  function toStringByFormatting(source, delimiter = "-") {
-    const year = source.getFullYear();
-    const month = leftPad(source.getMonth() + 1);
-    const day = leftPad(source.getDate());
-    return [year, month, day].join(delimiter);
-  }
   const [value, setValue] = useState("1");
   const history = useHistory();
-  const startDay = new Date();
-  const endDay = new Date();
-  startDay.setMonth(startDay.getMonth() - 1);
-  const [search, setSearch] = useState({
-    search_type: "전체",
-    search_start_date: toStringByFormatting(startDay, '/'),
-    search_end_date: toStringByFormatting(endDay, '/'),
-    search_local: "전체",
-  });
-  
+
+  const [search, setSearch] = useState(getDefaultState());
 
   const handleChange = (event, newValue) => {
     console.log(newValue);
     setValue(newValue);
-    switch (newValue) {
-      case 1: {
-        history.push("/home/map_page");
-        break;
-      }
-      case 2: {
-        history.push("/home/data_organize");
-        break;
-      }
-      case 3: {
-        history.push("/home/account_manage");
-        break;
-      }
-      default:
-        break;
-    }
   };
+
+  useEffect(() => {}, [search]);
   return (
     <div>
       <Box sx={{ width: "100%", typography: "body1" }}>

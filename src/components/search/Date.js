@@ -4,6 +4,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { Grid } from "@mui/material";
+import {toStringByFormatting} from "../../common/functions/getDefaultState"
 
 const DateSearching = (props) => {
   const startDay = new Date();
@@ -22,6 +23,9 @@ const DateSearching = (props) => {
             onChange={(newValue) => {
               console.log(newValue);
               setStartDate(newValue);
+              props.settingStart({
+                start_date : toStringByFormatting(newValue, "/"),
+              })
             }}
             renderInput={(params) => <TextField {...params} />}
           />
@@ -35,6 +39,9 @@ const DateSearching = (props) => {
             value={endDate}
             onChange={(newValue) => {
               setEndDate(newValue);
+              props.settingEnd({
+                end_date : toStringByFormatting(newValue, "/"),
+              })
             }}
             renderInput={(params) => <TextField {...params} />}
           />

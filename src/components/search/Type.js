@@ -6,12 +6,12 @@ import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid"
 
 
-
-export default function Type(props) {
+const Type = (props) => {
   const [type, setType] = useState("전체");
 
   const handleChange = (event) => {
     setType(event.target.value);
+    props.setting({type : event.target.value});
   };
   return (
     <div style={props.style}>
@@ -37,23 +37,4 @@ export default function Type(props) {
   );
 }
 
-const site = {
-    width: "74px",
-    height: "33px",
-    textAlign: "center",
-    font: "normal normal normal 16px/19px NanumGothic",
-    letterSpacing: "0px",
-    paddingTop: "7px",
-    borderRight: "1px solid #5D5D5D",
-    float: "left"
-}
-
-const siteSelect = {
-    width: "90px",
-    height: "33px",
-    textAlign: "center",
-    font: "normal normal normal 16px/19px NanumGothic",
-    letterSpacing: "0px",
-    paddingTop: "7px",
-    float: "left"
-}
+export default Type;
