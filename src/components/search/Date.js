@@ -13,7 +13,7 @@ const DateSearching = ({settingStart}) => {
 
 
   return (
-    <Grid container className="searchBar" spacing={2}>
+    //<Grid container className="searchBar" spacing={2}>
       <Grid item xs={3}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
@@ -30,7 +30,7 @@ const DateSearching = ({settingStart}) => {
         </LocalizationProvider>
       </Grid>
 
-    </Grid>
+    //</Grid>
   );
 };
 

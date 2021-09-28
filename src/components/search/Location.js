@@ -6,19 +6,16 @@ import Select from "@mui/material/Select";
 
 
 
-const Location = (props) => {
+const Location = ({setting}) => {
   const [location, setLocation] = useState("전체");
 
   const handleChange = (event) => {
     //props.setting(event.target.value);
     setLocation(event.target.value);
-    //props.setting(event.target.value);
+    setting(event.target.value);
   };
-  useEffect(() => {
-    props.setting(location);
-  },[location])
   return (
-    <div style={props.style}>
+    <div>
       <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-filled-label">권역</InputLabel>
           <Select
@@ -26,9 +23,8 @@ const Location = (props) => {
             id="demo-simple-select-filled"
             value={location}
             onChange={handleChange}
-            onClick={props.setting(location)}
           >
-            <MenuItem value="전체" onClick={props.setting("전체")}>
+            <MenuItem value="전체">
               <em>전체</em>
             </MenuItem>
             <MenuItem value={"문의"}>문의</MenuItem>

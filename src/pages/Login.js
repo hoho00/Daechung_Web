@@ -30,7 +30,7 @@ const Login = () => {
             style={{ height: '108px', width: '132px' }}
             onClick={() =>
               history.push({
-                pathname: "/home/map_page",
+                pathname: "/home/map_page"
               })
             }
           >
