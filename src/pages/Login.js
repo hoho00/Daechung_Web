@@ -31,7 +31,6 @@ const Login = () => {
             onClick={() =>
               history.push({
                 pathname: "/home/map_page",
-                state: { search: defaultState },
               })
             }
           >
