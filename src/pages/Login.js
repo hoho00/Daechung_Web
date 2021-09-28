@@ -5,8 +5,6 @@ import Header from "../common/layouts/Header";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import { getDefaultState } from "../common/functions/getDefaultState";
-import { Container, Row, Col } from 'reactstrap';
-import styles from '../components/css/styles.css'
 
 const Login = () => {
 
@@ -14,54 +12,59 @@ const Login = () => {
   const defaultState = getDefaultState();
   console.log("login : ", defaultState);
   return (
-    <div style={{ backgroundColor: 'grey', height: '100vh', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-      {/* <Header /> */}
+    <div style={container}>
       <div>
-        <h1 style={{ color: "#005596", alignSelf: 'center', justifyContent: 'center', fontSize: '65px' }}>
-          대청댐 유역관리
-        </h1>
-        <div style={{
-          display: "inline-block", flexDirection: 'row'
-
-        }}>
-          <div style={{ display: 'grid' }}>
-            <input style={{ height: '49px', width: "265px", marginBottom: '10px', marginRight: '12px' }}></input>
-            <input style={{ height: '49px', width: "265px" }}></input>
+        <div>
+          <h1 style={title}>대청댐 유역관리</h1>
+        </div>
+        <div style={{ justifyContent: 'space-between' }}>
+          <div style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ flexDirection: 'column', display: 'flex', justifyContent: 'space-between' }}>
+              <input type="email" placeholder="아이디" style={inputStyle}></input>
+              <input type="password" placeholder="비밀번호" style={inputStyle}></input>
+            </div>
+            <button
+              style={loginButton}
+              onClick={() =>
+                history.push({
+                  pathname: "/home/map_page",
+                  state: { search: defaultState },
+                })
+              }
+            >
+              <Link to="/home/map_page"><h1 style={{ color: 'white', fontSize: '16px' }}>로그인</h1></Link>
+            </button>
           </div>
-          <button
-            style={{ height: '108px', width: '132px' }}
-            onClick={() =>
-              history.push({
-                pathname: "/home/map_page",
-                state: { search: defaultState },
-              })
-            }
-          >
-            <Link to="/home/map_page">Login</Link>
-          </button>
+
+
         </div>
       </div>
-
-      {/* <Footer /> */}
-    </div >
-    // <>
-    //   {/* <Row>asdf</Row> */}
-    //   <Container md="12">
-
-    //     <Col style={{ alignSelf: 'center', justifyContent: 'center', alignItems: 'center', backgroundColor: 'green' }}>
-    //       <h1 style={{ color: "#005596", alignSelf: 'center', justifyContent: 'center', fontSize: '65px' }}>대청댐 유역관리</h1>
-    //       <Col md="1">
-    //         <input></input>
-    //         <input></input>
-    //       </Col>
-    //     </Col>
-    //   </Container>
-    // </>
+    </div>
   );
 };
 
 export default Login;
 
-// const title = {
-
-// }
+const title = {
+  color: '#005596',
+  fontSize: '65px',
+  marginBottom: '77px'
+}
+const inputStyle = {
+  borderRadius: '5px',
+  border: '1px solid #5D5D5D',
+  height: '49px', width: '265px',
+  paddingLeft: '15px'
+}
+const container = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh'
+}
+const loginButton = {
+  height: '108px', width: '132px',
+  background: '#005596',
+  borderRadius: '5px',
+  border: '1px solid #5D5D5D'
+}

@@ -17,14 +17,15 @@ const MenuSelecterBar = (props) => {
     setValue(newValue);
   };
 
-  useEffect(() => {}, [search]);
+  useEffect(() => { }, [search]);
   return (
     <div>
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab
+                style={{ background: '#005596', border: '1px solid #005596' }}
                 label="지도화면"
                 value="1"
                 onClick={() =>
@@ -52,3 +53,11 @@ const MenuSelecterBar = (props) => {
   );
 };
 export default MenuSelecterBar;
+
+const selectedSection = {
+
+}
+
+const unSelctedSection = {
+
+}
