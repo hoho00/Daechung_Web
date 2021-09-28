@@ -5,15 +5,15 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 
-const Type = (props) => {
+const Type = ({setting}) => {
   const [type, setType] = useState("전체");
 
   const handleChange = (event) => {
     setType(event.target.value);
-    props.setting(event.target.value);
+    setting(event.target.value);
   };
   return (
-    <div style={props.style}>
+    <div>
       <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-filled-label">항목</InputLabel>
         <Select

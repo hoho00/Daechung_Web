@@ -27,31 +27,32 @@ const MapPage = () => {
       });
   };
   useEffect(() => {
-    console.log(searchResult);
+    getReports();
+    console.log("default search result : ",searchResult);
+    //getReports();
   }, [])
+  useEffect(() => {
+    getReports();
+  },[searchResult]);
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_local: local_ });
-    getReports();
-  }, [local_]);
+  }, [local_, setLocal]);
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_type: type_ });
-    getReports();
-  }, [type_]);
+  }, [type_, setType]);
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_start_date: startDate_ });
-    getReports();
-  }, [startDate_]);
+  }, [startDate_, setStartDate]);
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_end_date: endDate_ });
-    getReports();
-  }, [endDate_]);
+  }, [endDate_, setEndDate]);
 
   return (
     <div>
