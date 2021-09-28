@@ -8,6 +8,7 @@ import {toStringByFormatting} from "../../common/functions/getDefaultState"
 
 const DateSearchingEnd = ({settingEnd}) => {
   const endDay = new Date();
+  endDay.setMonth(endDay.getMonth());
   const [endDate, setEndDate] = useState(endDay);
 
   return (

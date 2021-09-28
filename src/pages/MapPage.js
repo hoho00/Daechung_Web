@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getDefaultState } from "../common/functions/getDefaultState";
-import Footer from "../common/layouts/Footer";
-import Header from "../common/layouts/Header";
 import Map from "../components/map/KKO_Map";
-import MenuSelecterBar from "../components/menuSelectBar/MenuSelecterBar";
 import SearchBar from "../components/search/SearchBar";
 import axios from "axios";
 
@@ -26,32 +23,33 @@ const MapPage = () => {
         setReports(e.data.data);
       });
   };
-  useEffect(() => {
-    console.log(searchResult);
-  }, [])
+  useEffect( () => {
+    const func = async () => {
+      await getReports();
+    }
+    func();
+    console.log("default search result : ",searchResult);
+  },[searchResult]);
+  
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_local: local_ });
-    getReports();
-  }, [local_]);
+  }, [local_, setLocal]);
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_type: type_ });
-    getReports();
-  }, [type_]);
+  }, [type_, setType]);
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_start_date: startDate_ });
-    getReports();
-  }, [startDate_]);
+  }, [startDate_, setStartDate]);
 
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_end_date: endDate_ });
-    getReports();
-  }, [endDate_]);
+  }, [endDate_, setEndDate]);
 
   return (
     <div>
