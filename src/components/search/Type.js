@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 
-const Type = ({setting}) => {
+const Type = ({ setting }) => {
   const [type, setType] = useState("전체");
 
   const handleChange = (event) => {
@@ -13,18 +13,16 @@ const Type = ({setting}) => {
     setting(event.target.value);
   };
   return (
-    <div>
-      <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-filled-label">항목</InputLabel>
+    <div style={{ height: '35px', display: 'flex', width: '164px', justifyContent: 'center', marginRight: '5px' }}>
+      <FormControl>
         <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
+          sx={{ height: '35px', border: '1px solid #5D5D5D', width: '164px', backgroundColor: 'white', borderRadius: '0px' }}
           value={type}
           onChange={handleChange}
+          displayEmpty
+          inputProps={{ 'aria-label': 'Without label' }}
         >
-          <MenuItem value="전체">
-            <em>전체</em>
-          </MenuItem>
+          <MenuItem value="전체">전체</MenuItem>
           <MenuItem value={"녹조"}>녹조</MenuItem>
           <MenuItem value={"부유물"}>부유물</MenuItem>
           <MenuItem value={"방치 쓰레기"}>방치 쓰레기</MenuItem>
