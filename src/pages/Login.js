@@ -23,11 +23,11 @@ const Login = () => {
             </div>
             <button
               style={loginButton}
-              onClick={() =>
-                history.push({
-                  pathname: "/home/map_page",
-                })
-              }
+              // onClick={() =>
+              //   history.push({
+              //     pathname: "/home/map_page",
+              //   })
+              // }
             >
               <Link to="/home/map_page"><h1 style={{ color: 'white', fontSize: '16px' }}>로그인</h1></Link>
             </button>
