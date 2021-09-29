@@ -10,13 +10,16 @@ const Body = () => {
   return (
     <div>
       <Header />
-      <div>
-        <MenuSelecterBar />
-      </div>
-      <div>
-        <Route exact path="/home/map_page" component={MapPage} />
-        <Route path="/home/data_organize" component={DataOrganizePage} />
-        <Route path="/home/account_manage" component={AccountManagePage} />
+      <div style={{ paddingLeft: '70px', paddingRight: '70px', paddingTop: '50px', paddingBottom: '50px' }}>
+
+        <div>
+          <MenuSelecterBar />
+        </div>
+        <div>
+          <Route exact path="/home/map_page" component={MapPage} />
+          <Route path="/home/data_organize" component={DataOrganizePage} />
+          <Route path="/home/account_manage" component={AccountManagePage} />
+        </div>
       </div>
 
       <Footer />
