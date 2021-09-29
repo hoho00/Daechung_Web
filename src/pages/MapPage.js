@@ -3,6 +3,10 @@ import { getDefaultState } from "../common/functions/getDefaultState";
 import Map from "../components/map/KKO_Map";
 import SearchBar from "../components/search/SearchBar";
 import axios from "axios";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import ReportList from "../components/reportList/ReportList";
 
 const MapPage = () => {
   const [searchResult, setSearchResult] = useState(getDefaultState());
@@ -19,18 +23,19 @@ const MapPage = () => {
         headers: {
           "content-type": "text/plain",
         },
-      }).then((e) => {
+      })
+      .then((e) => {
         setReports(e.data.data);
       });
   };
-  useEffect( () => {
+  useEffect(() => {
     const func = async () => {
       await getReports();
-    }
+    };
     func();
-    console.log("default search result : ",searchResult);
-  },[searchResult]);
-  
+    console.log("default search result : ", searchResult);
+  }, [searchResult]);
+
   useEffect(() => {
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_local: local_ });
@@ -60,7 +65,14 @@ const MapPage = () => {
           settingStartDate={setStartDate}
           settingEndDate={setEndDate}
         />
-        <Map searchResult={reports} />
+        <div >
+          <div style={{flexDirection: "row",display: "flex",}}>
+            <Container fixed={true}>
+                <ReportList searchResult={reports} />
+            </Container>
+            <Map searchResult={reports} />
+          </div>
+        </div>
       </div>
     </div>
   );
