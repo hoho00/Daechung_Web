@@ -25,7 +25,7 @@ const renderRow = (props) => {
 };
 
 const RepoprtList = ({ searchResult }) => {
-  const listItems = searchResult.map((e) => <li key={e.rp_id}>{e.rp_type}</li>);
+  //const listItems = searchResult.map((e) => <li key={e.rp_id}>{e.rp_type}</li>);
   useEffect(() => {
     console.log("lists : ", searchResult);
   }, [searchResult]);

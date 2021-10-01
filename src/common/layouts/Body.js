@@ -8,7 +8,7 @@ import Header from "./Header";
 
 const Body = () => {
   return (
-    <div>
+    <div >
       <Header />
       <div style={{ paddingLeft: '70px', paddingRight: '70px', paddingTop: '50px', paddingBottom: '50px' }}>
 

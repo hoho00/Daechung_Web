@@ -83,8 +83,7 @@ const MapPage = () => {
   }, [endDate_]);
 
   return (
-    <div>
-      <div>
+    <>
         <Box style={{ flexDirection: "row", display: "flex" }}>
           <SearchBar
             settingLocal={setLocal}
@@ -99,7 +98,7 @@ const MapPage = () => {
           </label>
         </Box>
 
-        <Box style={{ padding: "0" }}>
+        <Box style={{ padding: "0"}} sx={{border:1}}>
           <Box
             style={{
               flexDirection: "row",
@@ -114,8 +113,7 @@ const MapPage = () => {
             <Map searchResult={reports} />
           </Box>
         </Box>
-      </div>
-    </div>
+        </>
   );
 };
 
