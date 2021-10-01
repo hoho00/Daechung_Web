@@ -8,15 +8,13 @@ import { toStringByFormatting } from "../../common/functions/getDefaultState"
 import "react-datepicker/dist/react-datepicker.css"
 import koLocale from 'date-fns/locale/ko';
 import Box from '@mui/material/Box';
+import date from "date-and-time";
 
 // import DatePicker from "react-datepicker";
 
 const DateSearchingEnd = ({ settingEnd }) => {
   const endDay = new Date();
-  endDay.setMonth(endDay.getMonth());
   const [endDate, setEndDate] = useState(endDay);
-
-  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <div>
@@ -28,8 +26,9 @@ const DateSearchingEnd = ({ settingEnd }) => {
           value={endDate}
           onChange={(newValue) => {
             setEndDate(newValue);
+            console.log(newValue);
             settingEnd(
-              toStringByFormatting(newValue, "/"),
+              date.format(newValue, "YYYY/MM/DD 23:59")
             );
           }}
           renderInput={({ inputRef, inputProps, InputProps }) => (

@@ -7,9 +7,22 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import ReportList from "../components/reportList/ReportList";
+import { margin } from "@mui/system";
+import date from "date-and-time";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import IconButton from "@mui/material/IconButton";
 
+const endDay = new Date();
+const startDay = new Date();
+
+startDay.setMonth(startDay.getMonth() - 1);
 const MapPage = () => {
-  const [searchResult, setSearchResult] = useState(getDefaultState());
+  const [searchResult, setSearchResult] = useState({
+    search_type: "전체",
+    search_start_date: date.format(startDay, "YYYY/MM/DD"),
+    search_local: "전체",
+    search_end_date: date.format(endDay, "YYYY/MM/DD"),
+  });
   const [local_, setLocal] = useState("");
   const [type_, setType] = useState("");
   const [startDate_, setStartDate] = useState("");
@@ -17,8 +30,15 @@ const MapPage = () => {
 
   const [reports, setReports] = useState([]);
 
-  const getReports = async () => {
-    await axios
+  const getReports = () => {
+    if (searchResult.search_end_date === "") {
+      setSearchResult({
+        ...searchResult,
+        search_end_date: date.format(endDay, "YYYY/MM/DD 23:59"),
+      });
+    }
+    console.log(searchResult);
+    axios
       .post("/report/search", searchResult, {
         headers: {
           "content-type": "text/plain",
@@ -29,50 +49,71 @@ const MapPage = () => {
       });
   };
   useEffect(() => {
-    const func = async () => {
-      await getReports();
-    };
-    func();
+    getReports();
+    console.log("default search result no array: ", searchResult);
+  }, []);
+
+  useEffect(() => {
+    getReports();
     console.log("default search result : ", searchResult);
   }, [searchResult]);
 
   useEffect(() => {
+    //getReports();
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_local: local_ });
-  }, [local_, setLocal]);
+  }, [local_]);
 
   useEffect(() => {
+    //getReports();
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_type: type_ });
-  }, [type_, setType]);
+  }, [type_]);
 
   useEffect(() => {
+    //getReports();
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_start_date: startDate_ });
-  }, [startDate_, setStartDate]);
+  }, [startDate_]);
 
   useEffect(() => {
+    //getReports();
     console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_end_date: endDate_ });
-  }, [endDate_, setEndDate]);
+  }, [endDate_]);
 
   return (
     <div>
       <div>
-        <SearchBar
-          settingLocal={setLocal}
-          settingType={setType}
-          settingStartDate={setStartDate}
-          settingEndDate={setEndDate}
-        />
-        <div >
-          <div style={{flexDirection: "row",display: "flex",}}>
-            <Container fixed={true}>
-                <ReportList searchResult={reports} />
-            </Container>
+        <Box style={{ flexDirection: "row", display: "flex" }}>
+          <SearchBar
+            settingLocal={setLocal}
+            settingType={setType}
+            settingStartDate={setStartDate}
+            settingEndDate={setEndDate}
+          />
+          <label>
+            <IconButton component="span" onClick={getReports}>
+              <RefreshIcon />
+            </IconButton>
+          </label>
+        </Box>
+
+        <Box style={{ padding: "0" }}>
+          <Box
+            style={{
+              flexDirection: "row",
+              display: "flex",
+              padding: "0",
+              border: "black",
+            }}
+          >
+            <Box fixed={true}>
+              <ReportList searchResult={reports} />
+            </Box>
             <Map searchResult={reports} />
-          </div>
-        </div>
+          </Box>
+        </Box>
       </div>
     </div>
   );

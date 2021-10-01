@@ -16,29 +16,6 @@ const Location = ({ setting }) => {
   };
   return (
     <div style={{ height: '35px', display: 'flex', width: '90px', justifyContent: 'center', marginRight: '5px' }}>
-      {/* <FormControl variant='standard' xs={{ minWidth: '90px' }}>
-        <Select
-          labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-filled"
-          displayEmpty
-          value={location}
-          onChange={handleChange}
-        >
-          <MenuItem value="전체">전체</MenuItem>
-          <MenuItem value={"문의"}>문의</MenuItem>
-          <MenuItem value={"화남1"}>화남1</MenuItem>
-          <MenuItem value={"화남2"}>화남2</MenuItem>
-          <MenuItem value={"세천"}>세천</MenuItem>
-          <MenuItem value={"군북1"}>군북1</MenuItem>
-          <MenuItem value={"군북2"}>군북2</MenuItem>
-          <MenuItem value={"군북3"}>군북3</MenuItem>
-          <MenuItem value={"군북4"}>군북4</MenuItem>
-          <MenuItem value={"군북5"}>군북5</MenuItem>
-          <MenuItem value={"수북"}>수북</MenuItem>
-          <MenuItem value={"안남"}>안남</MenuItem>
-          <MenuItem value={"청성"}>청성</MenuItem>
-        </Select>
-      </FormControl> */}
       <FormControl>
         <Select
           sx={{ height: '35px', border: '1px solid #5D5D5D', width: '90px', backgroundColor: 'white', borderRadius: '0px' }}
