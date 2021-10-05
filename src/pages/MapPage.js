@@ -107,7 +107,7 @@ const MapPage = () => {
               border: "black",
             }}
           >
-            <Box fixed={true}>
+            <Box >
               <ReportList searchResult={reports} />
             </Box>
             <Map searchResult={reports} />
