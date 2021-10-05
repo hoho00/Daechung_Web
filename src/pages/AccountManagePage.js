@@ -12,6 +12,16 @@ import List from "@mui/material/List";
 import IconButton from "@mui/material/IconButton";
 import { makeStyles, Paper, Typography } from "@material-ui/core";
 import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import PersonAvatar from "@mui/icons-material/Person";
+import ListSubheader from "@mui/material/ListSubheader";
+import Stack from '@mui/material/Stack';
 
 const style = {
   position: "absolute",
@@ -19,6 +29,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  height: "70vh",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -41,25 +52,41 @@ const AccountManagePage = () => {
     getUsers();
   }, []);
   return (
-    <Box>
-      <Box sx={{ border: 1 }}>
-        <h1>사용자 계정 목록</h1>
-        <Box>
+    <Box style={{ height: "70vh" }}>
+      <Box sx={{ border: 1, borderColor: "black" }}>
+        <Stack direction="row" sx={{m:1}}>
+              <PersonAvatar sx={{m:1}} />
+              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1}}>
+                <Typography noWrap>{`이름`}</Typography>
+              </Box>
+              {/* <Divider orientation="vertical"/> */}
+              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+                <Typography noWrap>{`아이디`}</Typography>
+              </Box>
+              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+                <Typography noWrap>{`비밀번호`}</Typography>
+              </Box>
+              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+                <Typography noWrap>{`권역`}</Typography>
+              </Box>
+          </Stack>
+          <Divider sx={{border:1}}/>
           <List
             sx={{
-              width: 976,
+              width: "100%",
               bgcolor: "background.paper",
-              height: 771,
+              height: "70vh",
               position: "relative",
-              maxHeight: 771,
+              maxHeight: "70vh",
               overflow: "auto",
               m: 0,
               p: 0,
               border: "black",
             }}
           >
+            
             {users.map((value) => (
-              <Box sx={{ border: "1px grey" }}>
+              <Box sx={{ border: "1px black" }}>
                 <ListItem
                   key={value.rp_id}
                   //onClick={() => console.log("hi")}
@@ -71,58 +98,57 @@ const AccountManagePage = () => {
                         aria-label="delete"
                         onClick={handleOpen}
                       >
-                        <Modal
-                          open={open}
-                          onClose={handleClose}
-                          aria-labelledby="modal-modal-title"
-                          aria-describedby="modal-modal-description"
-                        >
-                          <Box sx={style}>
-                            <Typography
-                              id="modal-modal-title"
-                              variant="h6"
-                              component="h2"
-                            >
-                              Text in a modal
-                            </Typography>
-                            <Typography
-                              id="modal-modal-description"
-                              sx={{ mt: 2 }}
-                            >
-                              Duis mollis, est non commodo luctus, nisi erat
-                              porttitor ligula.
-                            </Typography>
-                          </Box>
-                        </Modal>
                         <EditIcon />
                       </IconButton>
+                      <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle>Subscribe</DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            To subscribe to this website, please enter your
+                            email address here. We will send updates
+                            occasionally.
+                          </DialogContentText>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Email Address"
+                            type="email"
+                            fullWidth
+                            variant="standard"
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose}>Cancel</Button>
+                          <Button onClick={handleClose}>Subscribe</Button>
+                        </DialogActions>
+                      </Dialog>
                       <IconButton edge="end" aria-label="delete">
                         <DeleteIcon />
                       </IconButton>
                     </>
                   }
                 >
-                  <Box sx={{ m: 0, p: 0, width: 230 }}>
+                  <PersonAvatar />
+                  <Box sx={{ m: 0, p: 1, width: 230}}>
                     <Typography noWrap>{`${value.user_nm}`}</Typography>
-                    <ListItemText
-                      //primary={`신고내용 ${value.rp_con1}`}
-                      secondary={`${value.user_id}`}
-                      width="230"
-                    />
                   </Box>
-
+                  <Box sx={{ m: 0, p: 1, width: 230 }}>
+                    <Typography noWrap>{` ${value.user_id}`}</Typography>
+                  </Box>
+                  <Box sx={{ m: 0, p: 1, width: 230 }}>
+                    <Typography noWrap>{` ${value.user_pwd}`}</Typography>
+                  </Box>
+                  <Box sx={{ m: 0, p: 1, width: 230 }}>
+                    <Typography noWrap>{` ${value.user_local}`}</Typography>
+                  </Box>
                   <Divider orientation="vertical" />
-                  <Box>
-                    <ListItemText secondary={`${value.user_pwd}`} />
-                    <ListItemText secondary={`${value.user_nm}`} />
-                  </Box>
                 </ListItem>
               </Box>
             ))}
           </List>
         </Box>
       </Box>
-    </Box>
   );
 };
 

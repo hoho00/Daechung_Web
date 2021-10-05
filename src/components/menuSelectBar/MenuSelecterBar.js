@@ -18,7 +18,7 @@ const MenuSelecterBar = (props) => {
   };
 
   return (
-    <div style={{ marginBottom: '3vh' }}>
+    <div style={{ marginBottom: '1vh' }}>
       <Box sx={{ width: "100%", typography: "body1", height:"100%"}}>
         <TabContext value={value}>
           <Box>
@@ -72,7 +72,7 @@ const selectedSection = {
   background: '#005596',
   border: '1px solid #005596',
   width: '151px',
-  height: '47px',
+  height: '5vh',
   fontSize: '21px',
   color: 'white'
 
@@ -82,7 +82,7 @@ const unSelectedSection = {
   background: 'white',
   border: '1px solid #005596',
   width: '151px',
-  height: '47px',
+  height: '5vh',
   fontSize: '21px',
   color: '#005596'
 

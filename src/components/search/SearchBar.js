@@ -8,8 +8,7 @@ import { useState, useEffect } from "react";
 const SearchBar = ({ settingLocal, settingType, settingStartDate, settingEndDate }) => {
 
   return (
-    <>
-      <div style={{ display: 'flex', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', marginBottom: '1vh' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
 
           <div style={typeTitle}>권역</div>
@@ -24,7 +23,6 @@ const SearchBar = ({ settingLocal, settingType, settingStartDate, settingEndDate
           <DateSearchingEnd settingEnd={settingEndDate} />
         </div>
       </div>
-    </>
   );
 };
 

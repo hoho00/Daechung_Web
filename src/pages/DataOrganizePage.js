@@ -8,6 +8,7 @@ import {
   useFilters,
   useGlobalFilter,
   useAsyncDebounce,
+  usePagination,
 } from "react-table";
 import Box from "@mui/material/Box";
 
@@ -21,8 +22,7 @@ const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const Styles = styled.div`
-  padding: 1rem;
-
+  // padding: 1rem;
   table {
     border-spacing: 0;
     border: 1px solid grey;
@@ -46,6 +46,10 @@ const Styles = styled.div`
         border-right: 0;
       }
     }
+  }
+
+  .pagination {
+    padding: 0.5rem;
   }
 `;
 
@@ -169,6 +173,16 @@ function Table({ columns, data, download }) {
     rows,
     prepareRow,
     state,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
     visibleColumns,
     preGlobalFilteredRows,
     setGlobalFilter,
@@ -178,14 +192,16 @@ function Table({ columns, data, download }) {
       data,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
+      initialState: {pageIndex : 2}
     },
     useFilters, // useFilters!
-    useGlobalFilter // useGlobalFilter!
+    useGlobalFilter, // useGlobalFilter!
+    usePagination
   );
 
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
-  const firstPageRows = rows.slice(0, 10);
+  const firstPageRows = rows;
   // rows.forEach(element => {
   //   console.log(element.original);
   // });
@@ -193,7 +209,7 @@ function Table({ columns, data, download }) {
 
   return (
     <>
-      <table {...getTableProps()} width={1403} height={631}>
+      <table {...getTableProps()} width={"100%"} height={"100%"}>
         <thead>
           <tr>
             <th
@@ -237,6 +253,20 @@ function Table({ columns, data, download }) {
         </tbody>
       </table>
       <br />
+      <div className="pagination">
+      <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+      </div>
     </>
   );
 }
@@ -319,8 +349,9 @@ const DataOrganizePage = () => {
   );
 
   return (
-    <Styles>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+    <Box sx={{height:"70vh"}}>
+      <Styles>
+      <Box sx={{ display: "flex", justifyContent: "flex-end"}}>
         <Box sx={{ justifyContent: "flex-end", p: 2 }}>
           <ExcelFile>
             <ExcelSheet
@@ -337,9 +368,10 @@ const DataOrganizePage = () => {
           </ExcelFile>
         </Box>
       </Box>
-
       <Table columns={columns} data={reports} download={setDownloadRows} />
     </Styles>
+    </Box>
+    
   );
 };
 export default DataOrganizePage;
