@@ -23,9 +23,11 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 const Styles = styled.div`
   // padding: 1rem;
+  height: 100%;
   table {
     border-spacing: 0;
     border: 1px solid grey;
+    height: 100%;
 
     tr {
       :last-child {
@@ -192,7 +194,7 @@ function Table({ columns, data, download }) {
       data,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
-      initialState: {pageIndex : 2}
+      initialState: {pageIndex : 0}
     },
     useFilters, // useFilters!
     useGlobalFilter, // useGlobalFilter!
@@ -202,6 +204,7 @@ function Table({ columns, data, download }) {
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
   const firstPageRows = rows;
+  //setPageSize(10);
   // rows.forEach(element => {
   //   console.log(element.original);
   // });
@@ -238,7 +241,7 @@ function Table({ columns, data, download }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {firstPageRows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -267,6 +270,18 @@ function Table({ columns, data, download }) {
           {'>>'}
         </button>{' '}
       </div>
+      {/* <select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value))
+          }}
+        >
+          {[10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select> */}
     </>
   );
 }

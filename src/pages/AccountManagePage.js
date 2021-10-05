@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import axios from "axios";
 
@@ -22,6 +22,7 @@ import Button from "@mui/material/Button";
 import PersonAvatar from "@mui/icons-material/Person";
 import ListSubheader from "@mui/material/ListSubheader";
 import Stack from '@mui/material/Stack';
+import { SliderValueLabel } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -37,9 +38,24 @@ const style = {
 };
 
 const AccountManagePage = () => {
+  const [nameUpdating, setNameUpdating] = useState("");
+  const userNameRef = useRef("");
+  const userIdRef = useRef("");
+  const userPwdRef = useRef("");
+  const userLocalRef = useRef("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const updateUser = () => {
+    console.log(userNameRef.current.value, userIdRef.current.value, userPwdRef.current.value, userLocalRef.current.value);
+    handleClose();
+    //console.log(nameUpdating);
+  }
+
+  const handleUserNameUpdate = (event) => {
+    console.log(event.target.value);
+    setNameUpdating(event.target.value);
+  }
 
   const [users, setUsers] = useState([]);
   const getUsers = () => {
@@ -50,6 +66,7 @@ const AccountManagePage = () => {
   };
   useEffect(() => {
     getUsers();
+    
   }, []);
   return (
     <Box style={{ height: "70vh" }}>
@@ -84,12 +101,10 @@ const AccountManagePage = () => {
               border: "black",
             }}
           >
-            
-            {users.map((value) => (
+            {users.map((value, index) => (
               <Box sx={{ border: "1px black" }}>
                 <ListItem
-                  key={value.rp_id}
-                  //onClick={() => console.log("hi")}
+                  key={index}
                   divider={true}
                   secondaryAction={
                     <>
@@ -101,26 +116,59 @@ const AccountManagePage = () => {
                         <EditIcon />
                       </IconButton>
                       <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>Subscribe</DialogTitle>
+                        <DialogTitle>사용자 정보 수정</DialogTitle>
                         <DialogContent>
                           <DialogContentText>
-                            To subscribe to this website, please enter your
-                            email address here. We will send updates
-                            occasionally.
+                            정보 수정 하세요.
                           </DialogContentText>
                           <TextField
+                            required
                             autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Email Address"
-                            type="email"
+                            margin="normal"
+                            id="user_nm"
+                            label="이름"
+                            type="string"
                             fullWidth
-                            variant="standard"
+                            defaultValue={value.user_nm}
+                            inputRef={userNameRef}
+                          />
+                          <TextField
+                            required
+                            autoFocus
+                            margin="normal"
+                            id="user_id"
+                            label="아이디"
+                            type="string"
+                            fullWidth
+                            defaultValue={value.user_id}
+                            inputRef={userIdRef}
+                          />
+                          <TextField
+                            required
+                            autoFocus
+                            margin="normal"
+                            id="user_pwd"
+                            label="비밀번호"
+                            type="string"
+                            fullWidth
+                            defaultValue={value.user_pwd}
+                            inputRef={userPwdRef}
+                          />
+                          <TextField
+                            required
+                            autoFocus
+                            margin="normal"
+                            id="user_nm"
+                            label="권역"
+                            type="string"
+                            fullWidth
+                            defaultValue={value.user_local}
+                            inputRef={userLocalRef}
                           />
                         </DialogContent>
                         <DialogActions>
                           <Button onClick={handleClose}>Cancel</Button>
-                          <Button onClick={handleClose}>Subscribe</Button>
+                          <Button onClick={updateUser}>Submit</Button>
                         </DialogActions>
                       </Dialog>
                       <IconButton edge="end" aria-label="delete">
