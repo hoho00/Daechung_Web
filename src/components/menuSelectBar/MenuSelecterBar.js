@@ -18,8 +18,8 @@ const MenuSelecterBar = (props) => {
   };
 
   return (
-    <div style={{ marginBottom: '30px' }}>
-      <Box sx={{ width: "100%", typography: "body1" }}>
+    <div style={{ marginBottom: '3vh' }}>
+      <Box sx={{ width: "100%", typography: "body1", height:"100%"}}>
         <TabContext value={value}>
           <Box>
             <TabList onChange={handleChange} aria-label="lab API TabList example" textColor='inherit' indicatorColor='black'>

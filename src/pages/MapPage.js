@@ -84,7 +84,7 @@ const MapPage = () => {
 
   return (
     <>
-        <Box style={{ flexDirection: "row", display: "flex" }}>
+        <Box style={{ flexDirection: "row", display: "flex", height: "8vh"}}>
           <SearchBar
             settingLocal={setLocal}
             settingType={setType}
@@ -107,7 +107,7 @@ const MapPage = () => {
               border: "black",
             }}
           >
-            <Box >
+            <Box style = {{height:"100%"}}>
               <ReportList searchResult={reports} />
             </Box>
             <Map searchResult={reports} />
