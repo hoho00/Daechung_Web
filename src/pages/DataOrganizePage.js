@@ -20,13 +20,12 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
-
 const Styles = styled.div`
   padding: 1rem;
 
   table {
     border-spacing: 0;
-    border: 1px solid black;
+    border: 1px solid grey;
 
     tr {
       :last-child {
@@ -40,8 +39,8 @@ const Styles = styled.div`
     td {
       margin: 0;
       padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
+      border-bottom: 1px solid grey;
+      border-right: 1px solid grey;
 
       :last-child {
         border-right: 0;
@@ -250,10 +249,10 @@ const DataOrganizePage = () => {
     const f = downloadRows.map((e) => {
       return e.original;
     });
-    console.log("oh : ",f);
+    console.log("oh : ", f);
     setDownloadFileData(f);
-  }
-  
+  };
+
   const getReports = () => {
     axios
       .post(
@@ -277,12 +276,12 @@ const DataOrganizePage = () => {
   };
   useEffect(() => {
     getReports();
-      //console.log("excel files : ",downloadRows);
+    //console.log("excel files : ",downloadRows);
   }, []);
 
   useEffect(() => {
     setterData();
-    console.log("files : ", downloadFileData)
+    console.log("files : ", downloadFileData);
   }, [downloadRows]);
 
   const columns = React.useMemo(
@@ -323,20 +322,19 @@ const DataOrganizePage = () => {
     <Styles>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Box sx={{ justifyContent: "flex-end", p: 2 }}>
-          {/* <Button variant="contained" onClick={downloadExcel}>
-            다운로드
-          </Button> */}
           <ExcelFile>
-        <ExcelSheet data={downloadFileData} name="reports" element={ <Button variant="contained">
-            다운로드
-          </Button> }>
-          <ExcelColumn label="일시" value="rp_date"/>
-          <ExcelColumn label="신고자" value="user_nm"/>
-          <ExcelColumn label="권역" value="user_local"/>
-          <ExcelColumn label="신고 항목" value="rp_type"/>
-          <ExcelColumn label="신고 내용" value="rp_con1"/>
-        </ExcelSheet>
-      </ExcelFile>
+            <ExcelSheet
+              data={downloadFileData}
+              name="reports"
+              element={<Button variant="contained">다운로드</Button>}
+            >
+              <ExcelColumn label="일시" value="rp_date" />
+              <ExcelColumn label="신고자" value="user_nm" />
+              <ExcelColumn label="권역" value="user_local" />
+              <ExcelColumn label="신고 항목" value="rp_type" />
+              <ExcelColumn label="신고 내용" value="rp_con1" />
+            </ExcelSheet>
+          </ExcelFile>
         </Box>
       </Box>
 

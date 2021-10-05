@@ -26,7 +26,7 @@ const Map = ({ searchResult }) => {
   
 
   return (
-    <div style={{width : "13280px", height:"771px"}}>
+    <div style={{width : "100%", height:"60vh"}}>
       <div id="map" style={{ width: "100%", height: "100%"}}></div>
     </div>
   );
