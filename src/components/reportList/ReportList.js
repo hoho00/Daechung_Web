@@ -40,9 +40,9 @@ const RepoprtList = ({ searchResult }) => {
     <Box>
       <List
       sx={{
-        width: 396,
+        width: "100%",
         bgcolor: "background.paper",
-        height: 771,
+        height: "100%",
         position: "relative",
         maxHeight: 771,
         overflow: "auto",
