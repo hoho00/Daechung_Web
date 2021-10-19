@@ -1,29 +1,35 @@
-/*global kakao*/ 
-import React, { useEffect } from 'react'
+/*global kakao*/
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
-const KkoMap=()=>{
+const Map = ({ searchResult }) => {
 
-  useEffect(()=>{
-    var container = document.getElementById('map');
-    var options = {
-      center: new kakao.maps.LatLng(36.47769, 127.48078),
-      level: 3
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    console.log("map : ", searchResult);
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(35.14505, 129.0363),
+      level: 5,
     };
-    var map = new kakao.maps.Map(container, options);
-    var markerPosition  = new kakao.maps.LatLng(36.47769, 127.48078); 
-    var marker = new kakao.maps.Marker({
-      position: markerPosition
-  });
-    marker.setMap(map);
+    const map = new kakao.maps.Map(container, options);
 
-    }, [])
+    searchResult.map((e) => {
+      const marker = new kakao.maps.Marker({
+        position: new kakao.maps.LatLng(Number(e.rp_lat), Number(e.rp_lon)),
+      });
+      marker.setMap(map);
+    });
+  }, [searchResult]);
 
+  
 
-    return (
-        <div>
-        	<div id="map" style={{width:"1326px", height:"769px"}}></div> 
-        </div>
-    )
-}
+  return (
+    <div style={{width : "100%", height:"70vh"}}>
+      <div id="map" style={{ width: "100%", height: "100%"}}></div>
+    </div>
+  );
+};
 
-export default KkoMap;
+export default Map;
