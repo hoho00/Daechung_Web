@@ -44,7 +44,7 @@ const RepoprtList = ({ searchResult }) => {
         bgcolor: "background.paper",
         height: "100%",
         position: "relative",
-        maxHeight: "60vh",
+        maxHeight: "70vh",
         overflow: "auto",
         m: 0,
         p: 0,
