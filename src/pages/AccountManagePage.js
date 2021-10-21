@@ -21,8 +21,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import PersonAvatar from "@mui/icons-material/Person";
 import ListSubheader from "@mui/material/ListSubheader";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 import { SliderValueLabel } from "@mui/material";
+import { VpnLock } from "@mui/icons-material";
+import AccountDialog from "../components/accountDialog/AccountDialog";
+import DeleteDialog from "../components/deleteDialog/DeleteDialog";
 
 const style = {
   position: "absolute",
@@ -39,164 +42,122 @@ const style = {
 
 const AccountManagePage = () => {
   const [nameUpdating, setNameUpdating] = useState("");
-  const userNameRef = useRef("");
-  const userIdRef = useRef("");
-  const userPwdRef = useRef("");
-  const userLocalRef = useRef("");
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const updateUser = () => {
-    console.log(userNameRef.current.value, userIdRef.current.value, userPwdRef.current.value, userLocalRef.current.value);
-    handleClose();
-    //console.log(nameUpdating);
-  }
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
+  const handleOpen = (user) => {
+    console.log("open", user);
+    setSelectedUser(user);
+    setOpen(true);
+  };
+  const handleDeleteDialogOpen = (user) => {
+    console.log("delete open", user);
+    setSelectedUser(user);
+    setDeleteDialogOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-  const handleUserNameUpdate = (event) => {
-    console.log(event.target.value);
-    setNameUpdating(event.target.value);
-  }
+  const handleDeleteDialogClose = () => {
+    setDeleteDialogOpen(false);
+  };
 
   const [users, setUsers] = useState([]);
   const getUsers = () => {
     axios.get("/user").then((e) => {
       setUsers(e.data.data);
-      console.log(e.data.data);
     });
   };
   useEffect(() => {
     getUsers();
-    
+    console.log(users);
   }, []);
   return (
     <Box style={{ height: "70vh" }}>
       <Box sx={{ border: 1, borderColor: "black" }}>
-        <Stack direction="row" sx={{m:1}}>
-              <PersonAvatar sx={{m:1}} />
-              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1}}>
-                <Typography noWrap>{`이름`}</Typography>
-              </Box>
-              {/* <Divider orientation="vertical"/> */}
-              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-                <Typography noWrap>{`아이디`}</Typography>
-              </Box>
-              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-                <Typography noWrap>{`비밀번호`}</Typography>
-              </Box>
-              <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-                <Typography noWrap>{`권역`}</Typography>
-              </Box>
-          </Stack>
-          <Divider sx={{border:1}}/>
-          <List
-            sx={{
-              width: "100%",
-              bgcolor: "background.paper",
-              height: "70vh",
-              position: "relative",
-              maxHeight: "70vh",
-              overflow: "auto",
-              m: 0,
-              p: 0,
-              border: "black",
-            }}
-          >
-            {users.map((value, index) => (
-              <Box sx={{ border: "1px black" }}>
-                <ListItem
-                  key={index}
-                  divider={true}
-                  secondaryAction={
-                    <>
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={handleOpen}
-                      >
-                        <EditIcon />
-                      </IconButton>
-                      <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>사용자 정보 수정</DialogTitle>
-                        <DialogContent>
-                          <DialogContentText>
-                            정보 수정 하세요.
-                          </DialogContentText>
-                          <TextField
-                            required
-                            autoFocus
-                            margin="normal"
-                            id="user_nm"
-                            label="이름"
-                            type="string"
-                            fullWidth
-                            defaultValue={value.user_nm}
-                            inputRef={userNameRef}
-                          />
-                          <TextField
-                            required
-                            autoFocus
-                            margin="normal"
-                            id="user_id"
-                            label="아이디"
-                            type="string"
-                            fullWidth
-                            defaultValue={value.user_id}
-                            inputRef={userIdRef}
-                          />
-                          <TextField
-                            required
-                            autoFocus
-                            margin="normal"
-                            id="user_pwd"
-                            label="비밀번호"
-                            type="string"
-                            fullWidth
-                            defaultValue={value.user_pwd}
-                            inputRef={userPwdRef}
-                          />
-                          <TextField
-                            required
-                            autoFocus
-                            margin="normal"
-                            id="user_nm"
-                            label="권역"
-                            type="string"
-                            fullWidth
-                            defaultValue={value.user_local}
-                            inputRef={userLocalRef}
-                          />
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={handleClose}>Cancel</Button>
-                          <Button onClick={updateUser}>Submit</Button>
-                        </DialogActions>
-                      </Dialog>
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    </>
-                  }
+        <Stack direction="row" sx={{ m: 1 }}>
+          <PersonAvatar sx={{ m: 1 }} />
+          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+            <Typography noWrap>{`이름`}</Typography>
+          </Box>
+          {/* <Divider orientation="vertical"/> */}
+          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+            <Typography noWrap>{`아이디`}</Typography>
+          </Box>
+          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+            <Typography noWrap>{`비밀번호`}</Typography>
+          </Box>
+          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+            <Typography noWrap>{`권역`}</Typography>
+          </Box>
+        </Stack>
+        <Divider sx={{ border: 1 }} />
+        <List
+          sx={{
+            width: "100%",
+            bgcolor: "background.paper",
+            height: "70vh",
+            position: "relative",
+            maxHeight: "70vh",
+            overflow: "auto",
+            m: 0,
+            p: 0,
+            border: "black",
+          }}
+        >
+          {users.map((value, index) => (
+            <Box sx={{ border: "1px black" }}>
+              <ListItem key={index} divider={true}>
+                <PersonAvatar />
+                <Box sx={{ m: 0, p: 1, width: 230 }}>
+                  <Typography noWrap>{`${value.user_nm}`}</Typography>
+                </Box>
+                <Box sx={{ m: 0, p: 1, width: 230 }}>
+                  <Typography noWrap>{` ${value.user_id}`}</Typography>
+                </Box>
+                <Box sx={{ m: 0, p: 1, width: 230 }}>
+                  <Typography noWrap>{` ${value.user_pwd}`}</Typography>
+                </Box>
+                <Box sx={{ m: 0, p: 1, width: 230 }}>
+                  <Typography noWrap>{` ${value.user_local}`}</Typography>
+                </Box>
+                <Divider orientation="vertical" />
+                <IconButton
+                  edge="end"
+                  aria-label="edit"
+                  onClick={() => {
+                    handleOpen(value);
+                  }}
                 >
-                  <PersonAvatar />
-                  <Box sx={{ m: 0, p: 1, width: 230}}>
-                    <Typography noWrap>{`${value.user_nm}`}</Typography>
-                  </Box>
-                  <Box sx={{ m: 0, p: 1, width: 230 }}>
-                    <Typography noWrap>{` ${value.user_id}`}</Typography>
-                  </Box>
-                  <Box sx={{ m: 0, p: 1, width: 230 }}>
-                    <Typography noWrap>{` ${value.user_pwd}`}</Typography>
-                  </Box>
-                  <Box sx={{ m: 0, p: 1, width: 230 }}>
-                    <Typography noWrap>{` ${value.user_local}`}</Typography>
-                  </Box>
-                  <Divider orientation="vertical" />
-                </ListItem>
-              </Box>
-            ))}
-          </List>
-        </Box>
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => {
+                    handleDeleteDialogOpen(value);
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </ListItem>
+            </Box>
+          ))}
+          <AccountDialog
+            open={open}
+            onClose={handleClose}
+            data={selectedUser}
+            updateUser={handleClose}
+          />
+          <DeleteDialog
+            open={deleteDialogOpen}
+            onClose={handleDeleteDialogClose}
+            data={selectedUser}
+          />
+        </List>
       </Box>
+    </Box>
   );
 };
 
