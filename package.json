@@ -59,7 +59,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://pinto-toy.machete.co.kr:8001",
+  "proxy": "http://localhost:8000",
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
