@@ -84,36 +84,36 @@ const MapPage = () => {
 
   return (
     <>
-        <Box style={{ flexDirection: "row", display: "flex", height: "8vh"}}>
-          <SearchBar
-            settingLocal={setLocal}
-            settingType={setType}
-            settingStartDate={setStartDate}
-            settingEndDate={setEndDate}
-          />
-          <label>
-            <IconButton component="span" onClick={getReports}>
-              <RefreshIcon />
-            </IconButton>
-          </label>
-        </Box>
+      <Box style={{ flexDirection: "row", display: "flex", height: "8vh" }}>
+        <SearchBar
+          settingLocal={setLocal}
+          settingType={setType}
+          settingStartDate={setStartDate}
+          settingEndDate={setEndDate}
+        />
+        <label>
+          <IconButton component="span" onClick={getReports}>
+            <RefreshIcon />
+          </IconButton>
+        </label>
+      </Box>
 
-        <Box style={{ padding: "0"}} sx={{border:1}}>
-          <Box
-            style={{
-              flexDirection: "row",
-              display: "flex",
-              padding: "0",
-              border: "black",
-            }}
-          >
-            <Box style = {{height:"100%"}}>
-              <ReportList searchResult={reports} />
-            </Box>
-            <Map searchResult={reports} />
+      <Box style={{ padding: "0" }} sx={{ border: 1 }}>
+        <Box
+          style={{
+            flexDirection: "row",
+            display: "flex",
+            padding: "0",
+            border: "black",
+          }}
+        >
+          <Box style={{ height: "100%" }}>
+            <ReportList searchResult={reports} />
           </Box>
+          <Map searchResult={reports} />
         </Box>
-        </>
+      </Box>
+    </>
   );
 };
 

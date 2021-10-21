@@ -4,14 +4,13 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 const Map = ({ searchResult }) => {
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     console.log("map : ", searchResult);
     const container = document.getElementById("map");
     const options = {
-      center: new kakao.maps.LatLng(35.14505, 129.0363),
-      level: 5,
+      center: new kakao.maps.LatLng(36.414685, 127.559674),
+      level: 8,
     };
     const map = new kakao.maps.Map(container, options);
 
@@ -23,11 +22,9 @@ const Map = ({ searchResult }) => {
     });
   }, [searchResult]);
 
-  
-
   return (
-    <div style={{width : "100%", height:"70vh"}}>
-      <div id="map" style={{ width: "100%", height: "100%"}}></div>
+    <div style={{ width: "100%", height: "70vh" }}>
+      <div id="map" style={{ width: "100%", height: "100%" }}></div>
     </div>
   );
 };
