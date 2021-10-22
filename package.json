@@ -20,6 +20,7 @@
     "date-fns": "^2.24.0",
     "match-sorter": "^6.3.1",
     "react": "^17.0.2",
+    "react-alice-carousel": "^2.5.1",
     "react-calendar": "^3.4.0",
     "react-data-export": "^0.6.0",
     "react-datepicker": "^4.2.1",
@@ -59,7 +60,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000",
+  "proxy": "http://pinto-toy.machete.co.kr:8001",
   "devDependencies": {
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
