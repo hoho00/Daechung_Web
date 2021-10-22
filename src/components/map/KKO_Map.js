@@ -19,7 +19,40 @@ const Map = ({ searchResult }) => {
         position: new kakao.maps.LatLng(Number(e.rp_lat), Number(e.rp_lon)),
       });
       marker.setMap(map);
+
+      var infowindow = new kakao.maps.InfoWindow({
+        content: `<div style="padding:5px;">${
+          e.rp_type
+        }<br><a href="https://map.kakao.com/link/to/${e.rp_con1},${Number(
+          e.rp_lat
+        )},${Number(
+          e.rp_lon
+        )}" style="color:blue" target="_blank">길찾기</a> </div>`,
+      });
+      infowindow.open(map, marker);
+      // kakao.maps.event.addListener(
+      //   marker,
+      //   "mouseover",
+      //   makeOverListener(map, marker, infowindow)
+      // );
+      // kakao.maps.event.addListener(
+      //   marker,
+      //   "mouseout",
+      //   makeOutListener(infowindow)
+      // );
     });
+    function makeOverListener(map, marker, infowindow) {
+      return function () {
+        infowindow.open(map, marker);
+      };
+    }
+
+    // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+    function makeOutListener(infowindow) {
+      return function () {
+        infowindow.close();
+      };
+    }
   }, [searchResult]);
 
   return (

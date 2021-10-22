@@ -21,6 +21,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import SimpleImageSlider from "react-simple-image-slider";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 
 const renderRow = (props) => {
   const { index, style, s } = props;
@@ -39,6 +41,7 @@ const RepoprtList = ({ searchResult }) => {
   const [selectedForDialog, setSelectedForDialog] = useState({});
   const [images, setImages] = useState([]);
   const handleClose = () => {
+    setImages([]);
     setOpenDialog(false);
   };
 
@@ -51,14 +54,19 @@ const RepoprtList = ({ searchResult }) => {
         //console.log(e.data.image_files);
         if (e.data.image_files) {
           const loaded = e.data.image_files.map((e) => {
-            return { url: `data:image/png;base64,${e.file}` };
+            return `data:image/png;base64,${e.file}`;
           });
           setImages(loaded);
         } else {
           setImages([itemData[0]]);
         }
       })
-      .then(() => setOpenDialog(true));
+      .then(() => {
+        //makeImageSwiper();
+        setTimeout(() => {
+          setOpenDialog(true);
+        }, 500);
+      });
   };
   useEffect(() => {
     console.log("lists : ", searchResult);
@@ -72,7 +80,7 @@ const RepoprtList = ({ searchResult }) => {
           //console.log(e.data.image_files);
           if (e.data.image_files) {
             const loaded = e.data.image_files.map((e) => {
-              return { url: `data:image/png;base64,${e.file}` };
+              return `data:image/png;base64,${e.file}`;
             });
             setImages(loaded);
           } else {
@@ -131,7 +139,14 @@ const RepoprtList = ({ searchResult }) => {
         <Box sx={{ width: 500, height: 600 }}>
           <DialogTitle>{selectedForDialog.rp_type}</DialogTitle>
           <Box sx={{ width: "100%", height: 300 }}>
-            <SimpleImageSlider width={500} height={300} images={images} />
+            <img
+              src={images[0]}
+              className="sliderimg"
+              alt="i"
+              loading="lazy"
+              width="100%"
+              height="100%"
+            />
           </Box>
           <DialogContent dividers={true}>
             <DialogContentText>
@@ -143,7 +158,6 @@ const RepoprtList = ({ searchResult }) => {
             <DialogContentText>
               {`산고 주소 : ${selectedForDialog.rp_add}`}
             </DialogContentText>
-
             <DialogContentText>
               {`신고 날짜 : ${selectedForDialog.rp_date}`}
             </DialogContentText>
@@ -160,35 +174,6 @@ const RepoprtList = ({ searchResult }) => {
   );
 };
 
-const itemData = [
-  {
-    url: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-];
+const itemData = "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e";
 
 export default RepoprtList;

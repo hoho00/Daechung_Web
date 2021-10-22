@@ -26,24 +26,15 @@ import { SliderValueLabel } from "@mui/material";
 import { VpnLock } from "@mui/icons-material";
 import AccountDialog from "../components/accountDialog/AccountDialog";
 import DeleteDialog from "../components/deleteDialog/DeleteDialog";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  height: "70vh",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import CreateDialog from "../components/createDialog/CreateDialog";
 
 const AccountManagePage = () => {
   const [nameUpdating, setNameUpdating] = useState("");
   const [open, setOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const handleOpen = (user) => {
     console.log("open", user);
@@ -55,12 +46,17 @@ const AccountManagePage = () => {
     setSelectedUser(user);
     setDeleteDialogOpen(true);
   };
+  const handleCreateDialogOpen = () => {
+    setCreateDialogOpen(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleDeleteDialogClose = () => {
     setDeleteDialogOpen(false);
+  };
+  const handleCreateDialogClose = () => {
+    setCreateDialogOpen(false);
   };
 
   const [users, setUsers] = useState([]);
@@ -155,8 +151,23 @@ const AccountManagePage = () => {
             onClose={handleDeleteDialogClose}
             data={selectedUser}
           />
+          <CreateDialog
+            open={createDialogOpen}
+            onClose={handleCreateDialogClose}
+          />
         </List>
       </Box>
+      <Fab
+        sx={{
+          position: "absolute",
+          bottom: 100,
+          right: 100,
+        }}
+        color={"primary"}
+        onClick={() => handleCreateDialogOpen()}
+      >
+        <AddIcon />
+      </Fab>
     </Box>
   );
 };
