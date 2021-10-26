@@ -194,7 +194,7 @@ function Table({ columns, data, download }) {
       data,
       defaultColumn, // Be sure to pass the defaultColumn option
       filterTypes,
-      initialState: {pageIndex : 0}
+      initialState: { pageIndex: 0 },
     },
     useFilters, // useFilters!
     useGlobalFilter, // useGlobalFilter!
@@ -257,18 +257,18 @@ function Table({ columns, data, download }) {
       </table>
       <br />
       <div className="pagination">
-      <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>{" "}
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
+          {"<"}
+        </button>{" "}
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
+          {">"}
+        </button>{" "}
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
+          {">>"}
+        </button>{" "}
       </div>
       {/* <select
           value={pageSize}
@@ -350,6 +350,10 @@ const DataOrganizePage = () => {
         filter: "includes",
       },
       {
+        Header: "신고 장소",
+        accessor: "rp_add",
+      },
+      {
         Header: "신고항목",
         accessor: "rp_type",
         Filter: SelectColumnFilter,
@@ -364,29 +368,29 @@ const DataOrganizePage = () => {
   );
 
   return (
-    <Box sx={{height:"70vh"}}>
+    <Box sx={{ height: "70vh" }}>
       <Styles>
-      <Box sx={{ display: "flex", justifyContent: "flex-end"}}>
-        <Box sx={{ justifyContent: "flex-end", p: 2 }}>
-          <ExcelFile>
-            <ExcelSheet
-              data={downloadFileData}
-              name="reports"
-              element={<Button variant="contained">다운로드</Button>}
-            >
-              <ExcelColumn label="일시" value="rp_date" />
-              <ExcelColumn label="신고자" value="user_nm" />
-              <ExcelColumn label="권역" value="user_local" />
-              <ExcelColumn label="신고 항목" value="rp_type" />
-              <ExcelColumn label="신고 내용" value="rp_con1" />
-            </ExcelSheet>
-          </ExcelFile>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ justifyContent: "flex-end", p: 2 }}>
+            <ExcelFile>
+              <ExcelSheet
+                data={downloadFileData}
+                name="reports"
+                element={<Button variant="contained">다운로드</Button>}
+              >
+                <ExcelColumn label="일시" value="rp_date" />
+                <ExcelColumn label="신고자" value="user_nm" />
+                <ExcelColumn label="권역" value="user_local" />
+                <ExcelColumn label="권역" value="rp_add" />
+                <ExcelColumn label="신고 항목" value="rp_type" />
+                <ExcelColumn label="신고 내용" value="rp_con1" />
+              </ExcelSheet>
+            </ExcelFile>
+          </Box>
         </Box>
-      </Box>
-      <Table columns={columns} data={reports} download={setDownloadRows} />
-    </Styles>
+        <Table columns={columns} data={reports} download={setDownloadRows} />
+      </Styles>
     </Box>
-    
   );
 };
 export default DataOrganizePage;
