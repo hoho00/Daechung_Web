@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 const CreateDialog = ({ open, onClose }) => {

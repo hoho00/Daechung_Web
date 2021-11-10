@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-
 import List from "@mui/material/List";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import { Typography } from "@material-ui/core";
 
-import { FixedSizeList } from "react-window";
-import { makeStyles, Paper, Typography } from "@material-ui/core";
-import { margin, maxHeight } from "@mui/system";
-import { ClassNames } from "@emotion/react";
 import {
   Dialog,
   DialogContent,
@@ -20,21 +13,7 @@ import {
   DialogTitle,
 } from "@mui/material";
 import axios from "axios";
-import SimpleImageSlider from "react-simple-image-slider";
-import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-
-const renderRow = (props) => {
-  const { index, style, s } = props;
-
-  return (
-    <ListItem style={style} key={index} component="div" disablePadding>
-      <ListItemButton>
-        {s && <ListItemText primary={`Item ${s[index]}`} />}
-      </ListItemButton>
-    </ListItem>
-  );
-};
 
 const RepoprtList = ({ searchResult }) => {
   const [openDialog, setOpenDialog] = useState(false);

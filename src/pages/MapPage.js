@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getDefaultState } from "../common/functions/getDefaultState";
 import Map from "../components/map/KKO_Map";
 import SearchBar from "../components/search/SearchBar";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
 import ReportList from "../components/reportList/ReportList";
-import { margin } from "@mui/system";
 import date from "date-and-time";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import IconButton from "@mui/material/IconButton";
