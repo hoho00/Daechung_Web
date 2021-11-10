@@ -25,6 +25,7 @@ const MapPage = () => {
   const [endDate_, setEndDate] = useState("");
 
   const [reports, setReports] = useState([]);
+  const [cluster, setCluster] = useState([]);
 
   const getReports = () => {
     if (searchResult.search_end_date === "") {
@@ -78,6 +79,10 @@ const MapPage = () => {
     setSearchResult({ ...searchResult, search_end_date: endDate_ });
   }, [endDate_]);
 
+  useEffect(() => {
+    console.log("clusterer : ", cluster);
+  }, [cluster]);
+
   return (
     <>
       <Box style={{ flexDirection: "row", display: "flex", height: "8vh" }}>
@@ -104,9 +109,9 @@ const MapPage = () => {
           }}
         >
           <Box style={{ height: "100%" }}>
-            <ReportList searchResult={reports} />
+            <ReportList searchResult={reports} clustererSelection={cluster} />
           </Box>
-          <Map searchResult={reports} />
+          <Map searchResult={reports} clustererSelection={setCluster} />
         </Box>
       </Box>
     </>
