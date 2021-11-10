@@ -1,29 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import axios from "axios";
-
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import List from "@mui/material/List";
 import IconButton from "@mui/material/IconButton";
-import { makeStyles, Paper, Typography } from "@material-ui/core";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Button from "@mui/material/Button";
+import { Typography } from "@material-ui/core";
 import PersonAvatar from "@mui/icons-material/Person";
-import ListSubheader from "@mui/material/ListSubheader";
 import Stack from "@mui/material/Stack";
-import { SliderValueLabel } from "@mui/material";
-import { VpnLock } from "@mui/icons-material";
 import AccountDialog from "../components/accountDialog/AccountDialog";
 import DeleteDialog from "../components/deleteDialog/DeleteDialog";
 import Fab from "@mui/material/Fab";
@@ -31,7 +17,6 @@ import AddIcon from "@mui/icons-material/Add";
 import CreateDialog from "../components/createDialog/CreateDialog";
 
 const AccountManagePage = () => {
-  const [nameUpdating, setNameUpdating] = useState("");
   const [open, setOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);

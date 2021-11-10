@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import Footer from "../common/layouts/Footer";
-import Header from "../common/layouts/Header";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import { getDefaultState } from "../common/functions/getDefaultState";
 import axios from "axios";
 
 const Login = () => {

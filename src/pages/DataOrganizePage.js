@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
-import { getDefaultState } from "../common/functions/getDefaultState";
 import styled from "styled-components";
 import {
   useTable,
@@ -178,7 +176,6 @@ function Table({ columns, data, download }) {
     page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
     gotoPage,
     nextPage,

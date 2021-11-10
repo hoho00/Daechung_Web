@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
-import InputLabel from "@mui/material/InputLabel";
+import { useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Grid from "@mui/material/Grid";
 
 const Type = ({ setting }) => {
   const [type, setType] = useState("전체");
@@ -13,14 +11,28 @@ const Type = ({ setting }) => {
     setting(event.target.value);
   };
   return (
-    <div style={{ height: '35px', display: 'flex', width: '164px', justifyContent: 'center', marginRight: '5px' }}>
+    <div
+      style={{
+        height: "35px",
+        display: "flex",
+        width: "164px",
+        justifyContent: "center",
+        marginRight: "5px",
+      }}
+    >
       <FormControl>
         <Select
-          sx={{ height: '35px', border: '1px solid #5D5D5D', width: '164px', backgroundColor: 'white', borderRadius: '0px' }}
+          sx={{
+            height: "35px",
+            border: "1px solid #5D5D5D",
+            width: "164px",
+            backgroundColor: "white",
+            borderRadius: "0px",
+          }}
           value={type}
           onChange={handleChange}
           displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
+          inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem value="전체">전체</MenuItem>
           <MenuItem value={"녹조"}>녹조</MenuItem>
