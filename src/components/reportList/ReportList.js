@@ -15,14 +15,31 @@ import {
 import axios from "axios";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-const RepoprtList = ({ searchResult }) => {
+const RepoprtList = ({ searchResult, clustererSelection }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedForDialog, setSelectedForDialog] = useState({});
   const [images, setImages] = useState([]);
+  const [listUp, setListUp] = useState([]);
   const handleClose = () => {
     setImages([]);
     setOpenDialog(false);
   };
+  useEffect(() => {
+    console.log("map clusterer select : ", clustererSelection);
+    //setSearchResult(clustererSelection);
+    //setClustererSelected(clustererSelection);
+    const selected = [];
+    for (var i = 0; i < clustererSelection.length; i++) {
+      for (var j = 0; j < searchResult.length; j++) {
+        if (searchResult[j].rp_id === clustererSelection[i]) {
+          selected.push(searchResult[j]);
+        }
+      }
+    }
+    console.log("selected : ", selected);
+    //setSearchResult(selected);
+    setListUp(selected);
+  }, [clustererSelection]);
 
   const handleOpen = (report) => {
     console.log("dialog report : ", report);
@@ -49,6 +66,7 @@ const RepoprtList = ({ searchResult }) => {
   };
   useEffect(() => {
     console.log("lists : ", searchResult);
+    setListUp(searchResult);
   }, [searchResult]);
 
   useEffect(() => {
@@ -86,7 +104,7 @@ const RepoprtList = ({ searchResult }) => {
             border: "black",
           }}
         >
-          {searchResult.map((value) => (
+          {listUp.map((value) => (
             <Box sx={{ border: "1px grey" }}>
               <ListItemButton
                 key={value.rp_id}
