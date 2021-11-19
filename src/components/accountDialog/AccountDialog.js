@@ -7,6 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import React from "react";
 
 const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
   const [user, setUser] = useState([]);

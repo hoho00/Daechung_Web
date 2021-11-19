@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import { Login } from "./pages";
 import Body from "./common/layouts/Body";
 import { CssBaseline } from "@material-ui/core";
+import React from "react";
 
 function App() {
   return (

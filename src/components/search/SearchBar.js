@@ -2,6 +2,7 @@ import Location from "./Location";
 import Type from "./Type";
 import DateSearching from "./Date";
 import DateSearchingEnd from "./DateSearchingEnd";
+import React from "react";
 
 const SearchBar = ({
   settingLocal,
