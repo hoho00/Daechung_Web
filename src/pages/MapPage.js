@@ -111,7 +111,7 @@ const MapPage = () => {
           <Box style={{ height: "100%" }}>
             <ReportList searchResult={reports} clustererSelection={cluster} />
           </Box>
-          <Map searchResult={reports} clustererSelection={setCluster} />
+          <Map searchResult={reports} clustererSelection={setCluster} searchType={searchResult} />
         </Box>
       </Box>
     </>
