@@ -23,28 +23,57 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
   useEffect(() => {
     setUser(data);
     setUpdateUserInfo(data);
+    setCheckDuplicate(false);
+    return () => {
+      checkDuplicate(false);
+    };
   }, []);
   useEffect(() => {
     setUser(data);
     setUpdateUserInfo(data);
+    setCheckDuplicate(false);
   }, [data]);
-  const checkDuplicateId = () => {};
+  useEffect(() => {
+    setUser(data);
+    setUpdateUserInfo(data);
+    setCheckDuplicate(false);
+  }, [open]);
+  const checkDuplicateId = async (checking) => {
+    console.log(checking, data.user_id);
+    if (checking === data.user_id) {
+      alert("중복체크 완료, 사용가능한 아이디 입니다.");
+      setCheckDuplicate(true);
+      return true;
+    } else {
+      const s = await axios.get(`
+      /user/check/id/${checking}
+      `);
+      console.log("status : ", s.data);
+      if (s.data.exist) {
+        alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
+      } else {
+        alert("중복체크 완료, 사용가능한 아이디 입니다.");
+      }
+      setCheckDuplicate(!s.data.exist);
+      return s.data.exist;
+    }
+  };
   const updateUserFromDialog = async (userInfo) => {
-    console.log("updating : ", userInfo);
-    //console.log()
-    const current_id = await axios.get(`/user/info/seq/${userInfo.user_seq}`);
-    const exist = await axios.get(`/user/check/id/${userInfo.user_id}`);
-    console.log("checking : ", current_id.data.data.user_id, exist.data.exist);
-    axios
-      .post("/user/update", userInfo, {
-        headers: {
-          "content-type": "text/plain",
-        },
-      })
-      .then((e) => {
-        alert("회원 정보가 변경 되었습니다. ");
-        window.location.replace("/home/account_manage");
-      });
+    if (!checkDuplicate) {
+      alert("아이디 중복 체크를 해 주세요.");
+    } else {
+      console.log("updating : ", userInfo);
+      axios
+        .post("/user/update", userInfo, {
+          headers: {
+            "content-type": "text/plain",
+          },
+        })
+        .then((e) => {
+          alert("회원 정보가 변경 되었습니다. ");
+          window.location.replace("/home/account_manage");
+        });
+    }
   };
   return (
     <Dialog open={open} onClose={onClose} key={key}>
@@ -126,18 +155,27 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
           <Button
             variant="text"
             color="error"
-            onClick={() => {
-              setCheckDuplicate(true);
+            onClick={async () => {
+              console.log(await checkDuplicateId(updateUserInfo.user_id));
+              //setCheckDuplicate(true);
             }}
           >
             아이디 중복확인
           </Button>
         )}
 
-        <Button onClick={onClose}>Cancel</Button>
+        <Button
+          onClick={() => {
+            onClose();
+            setCheckDuplicate(false);
+          }}
+        >
+          Cancel
+        </Button>
         <Button
           color="success"
           onClick={() => {
+            setCheckDuplicate(false);
             updateUserFromDialog(updateUserInfo);
             updateUser();
           }}

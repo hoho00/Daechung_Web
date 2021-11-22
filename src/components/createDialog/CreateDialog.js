@@ -5,43 +5,67 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
 
 const CreateDialog = ({ open, onClose }) => {
+  const [checkDuplicate, setCheckDuplicate] = useState(false);
   const [createUserInfo, setCreateUserInfo] = useState({
     user_id: "",
     user_pwd: "",
     user_local: "",
     user_nm: "",
   });
+  const checkDuplicateId = async (checking) => {
+    const s = await axios.get(`
+      /user/check/id/${checking}
+      `);
+    console.log("status : ", s.data);
+    if (s.data.exist) {
+      alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
+    } else {
+      alert("중복체크 완료, 사용가능한 아이디 입니다.");
+    }
+    setCheckDuplicate(!s.data.exist);
+    return s.data.exist;
+  };
+  useEffect(() => {
+    setCheckDuplicate(false);
+  }, []);
+  useEffect(() => {
+    setCheckDuplicate(false);
+  }, [open]);
   const register = async () => {
-    await axios
-      .post(
-        "/user/register",
-        {
-          user_id: createUserInfo.user_id,
-          user_pwd: createUserInfo.user_pwd,
-          user_nm: createUserInfo.user_nm,
-          user_local: createUserInfo.user_local,
-        },
-        {
-          headers: {
-            "content-type": "text/plain",
+    if (!checkDuplicate) {
+      alert("아이디 중복 체크를 해 주세요.");
+    } else {
+      await axios
+        .post(
+          "/user/register",
+          {
+            user_id: createUserInfo.user_id,
+            user_pwd: createUserInfo.user_pwd,
+            user_nm: createUserInfo.user_nm,
+            user_local: createUserInfo.user_local,
           },
-        }
-      )
-      .then((e) => {
-        alert("새로운 회원이 생성 되었습니다.");
-        window.location.replace("/home/account_manage");
-        setCreateUserInfo({
-          user_id: "",
-          user_pwd: "",
-          user_local: "",
-          user_nm: "",
+          {
+            headers: {
+              "content-type": "text/plain",
+            },
+          }
+        )
+        .then((e) => {
+          alert("새로운 회원이 생성 되었습니다.");
+          window.location.replace("/home/account_manage");
+          setCreateUserInfo({
+            user_id: "",
+            user_pwd: "",
+            user_local: "",
+            user_nm: "",
+          });
         });
-      });
+    }
   };
   return (
     <Dialog open={open} onClose={onClose}>
@@ -115,6 +139,20 @@ const CreateDialog = ({ open, onClose }) => {
         />
       </DialogContent>
       <DialogActions>
+        {checkDuplicate ? (
+          <Button variant="text">중복확인완료</Button>
+        ) : (
+          <Button
+            variant="text"
+            color="error"
+            onClick={async () => {
+              console.log(await checkDuplicateId(createUserInfo.user_id));
+              //setCheckDuplicate(true);
+            }}
+          >
+            아이디 중복확인
+          </Button>
+        )}
         <Button
           onClick={() => {
             onClose();
