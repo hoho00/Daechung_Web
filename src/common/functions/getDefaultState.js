@@ -1,3 +1,4 @@
+import React from "react";
 const getDefaultState = () => {
   const startDay = new Date();
   const endDay = new Date();

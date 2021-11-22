@@ -7,8 +7,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import React from "react";
+import { Box } from "@mui/system";
 
 const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
+  const [checkDuplicate, setCheckDuplicate] = useState(false);
   const [user, setUser] = useState([]);
   const [updateUserInfo, setUpdateUserInfo] = useState({
     user_seq: -1,
@@ -25,9 +28,13 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
     setUser(data);
     setUpdateUserInfo(data);
   }, [data]);
-  const updateUserFromDialog = (userInfo) => {
+  const checkDuplicateId = () => {};
+  const updateUserFromDialog = async (userInfo) => {
     console.log("updating : ", userInfo);
-
+    //console.log()
+    const current_id = await axios.get(`/user/info/seq/${userInfo.user_seq}`);
+    const exist = await axios.get(`/user/check/id/${userInfo.user_id}`);
+    console.log("checking : ", current_id.data.data.user_id, exist.data.exist);
     axios
       .post("/user/update", userInfo, {
         headers: {
@@ -60,22 +67,25 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
             })
           }
         />
-        <TextField
-          required
-          autoFocus
-          margin="normal"
-          id="user_id"
-          label="아이디"
-          type="string"
-          fullWidth
-          defaultValue={user.user_id}
-          onChange={(e) =>
-            setUpdateUserInfo({
-              ...updateUserInfo,
-              user_id: e.target.value,
-            })
-          }
-        />
+        <Box>
+          <TextField
+            required
+            autoFocus
+            margin="normal"
+            id="user_id"
+            label="아이디"
+            type="string"
+            fullWidth
+            defaultValue={user.user_id}
+            onChange={(e) =>
+              setUpdateUserInfo({
+                ...updateUserInfo,
+                user_id: e.target.value,
+              })
+            }
+          />
+        </Box>
+
         <TextField
           required
           autoFocus
@@ -110,6 +120,20 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
         />
       </DialogContent>
       <DialogActions>
+        {checkDuplicate ? (
+          <Button variant="text">중복확인완료</Button>
+        ) : (
+          <Button
+            variant="text"
+            color="error"
+            onClick={() => {
+              setCheckDuplicate(true);
+            }}
+          >
+            아이디 중복확인
+          </Button>
+        )}
+
         <Button onClick={onClose}>Cancel</Button>
         <Button
           color="success"

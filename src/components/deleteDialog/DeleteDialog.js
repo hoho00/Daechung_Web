@@ -6,6 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import React from "react";
 
 const DeleteDialog = ({ open, onClose, updateUser, data, key }) => {
   const [deleteUserInfo, setDeleteUserInfo] = useState({

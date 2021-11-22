@@ -15,6 +15,7 @@ import DeleteDialog from "../components/deleteDialog/DeleteDialog";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CreateDialog from "../components/createDialog/CreateDialog";
+import Button from "@mui/material/Button";
 
 const AccountManagePage = () => {
   const [open, setOpen] = useState(false);
@@ -45,9 +46,10 @@ const AccountManagePage = () => {
   };
 
   const [users, setUsers] = useState([]);
-  const getUsers = () => {
-    axios.get("/user").then((e) => {
+  const getUsers = async () => {
+    await axios.get("/user").then((e) => {
       setUsers(e.data.data);
+      console.log("account : ", e.data.data);
     });
   };
   useEffect(() => {
@@ -71,6 +73,12 @@ const AccountManagePage = () => {
           </Box>
           <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
             <Typography noWrap>{`권역`}</Typography>
+          </Box>
+          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+            <Typography noWrap>{`최근접속시간`}</Typography>
+          </Box>
+          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
+            <Typography noWrap>{`인증코드`}</Typography>
           </Box>
         </Stack>
         <Divider sx={{ border: 1 }} />
@@ -102,6 +110,12 @@ const AccountManagePage = () => {
                 </Box>
                 <Box sx={{ m: 0, p: 1, width: 230 }}>
                   <Typography noWrap>{` ${value.user_local}`}</Typography>
+                </Box>
+                <Box sx={{ m: 0, p: 1, width: 230 }}>
+                  <Typography noWrap>{` ${value.latest}`}</Typography>
+                </Box>
+                <Box sx={{ m: 0, p: 1, width: 230 }}>
+                  <Typography noWrap>{` ${value.auth_code}`}</Typography>
                 </Box>
                 <Divider orientation="vertical" />
                 <IconButton
