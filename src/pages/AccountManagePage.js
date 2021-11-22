@@ -16,6 +16,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CreateDialog from "../components/createDialog/CreateDialog";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 const AccountManagePage = () => {
   const [open, setOpen] = useState(false);
@@ -59,28 +60,41 @@ const AccountManagePage = () => {
   return (
     <Box style={{ height: "70vh" }}>
       <Box sx={{ border: 1, borderColor: "black" }}>
-        <Stack direction="row" sx={{ m: 1 }}>
-          <PersonAvatar sx={{ m: 1 }} />
-          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-            <Typography noWrap>{`이름`}</Typography>
-          </Box>
-          {/* <Divider orientation="vertical"/> */}
-          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-            <Typography noWrap>{`아이디`}</Typography>
-          </Box>
-          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-            <Typography noWrap>{`비밀번호`}</Typography>
-          </Box>
-          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-            <Typography noWrap>{`권역`}</Typography>
-          </Box>
-          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-            <Typography noWrap>{`최근접속시간`}</Typography>
-          </Box>
-          <Box sx={{ m: 0, p: 1, width: 230, borderLeft: 1 }}>
-            <Typography noWrap>{`인증코드`}</Typography>
-          </Box>
-        </Stack>
+        <Grid container spacing={1}>
+          <Grid item xs={0.5}>
+            <PersonAvatar sx={{ m: 1 }} />
+          </Grid>
+          <Grid item xs={1}>
+            <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
+              <Typography noWrap>{`이름`}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
+              <Typography noWrap>{`아이디`}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
+              <Typography noWrap>{`비밀번호`}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
+              <Typography noWrap>{`권역`}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
+              <Typography noWrap>{`최근접속시간`}</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={1}>
+            <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
+              <Typography noWrap>{`인증코드`}</Typography>
+            </Box>
+          </Grid>
+        </Grid>
         <Divider sx={{ border: 1 }} />
         <List
           sx={{
@@ -98,44 +112,62 @@ const AccountManagePage = () => {
           {users.map((value, index) => (
             <Box sx={{ border: "1px black" }}>
               <ListItem key={index} divider={true}>
-                <PersonAvatar />
-                <Box sx={{ m: 0, p: 1, width: 230 }}>
-                  <Typography noWrap>{`${value.user_nm}`}</Typography>
-                </Box>
-                <Box sx={{ m: 0, p: 1, width: 230 }}>
-                  <Typography noWrap>{` ${value.user_id}`}</Typography>
-                </Box>
-                <Box sx={{ m: 0, p: 1, width: 230 }}>
-                  <Typography noWrap>{` ${value.user_pwd}`}</Typography>
-                </Box>
-                <Box sx={{ m: 0, p: 1, width: 230 }}>
-                  <Typography noWrap>{` ${value.user_local}`}</Typography>
-                </Box>
-                <Box sx={{ m: 0, p: 1, width: 230 }}>
-                  <Typography noWrap>{` ${value.latest}`}</Typography>
-                </Box>
-                <Box sx={{ m: 0, p: 1, width: 230 }}>
-                  <Typography noWrap>{` ${value.auth_code}`}</Typography>
-                </Box>
-                <Divider orientation="vertical" />
-                <IconButton
-                  edge="end"
-                  aria-label="edit"
-                  onClick={() => {
-                    handleOpen(value);
-                  }}
-                >
-                  <EditIcon />
-                </IconButton>
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => {
-                    handleDeleteDialogOpen(value);
-                  }}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <Grid container spacing={0.5}>
+                  <Grid item xs={0.5}>
+                    <PersonAvatar />
+                  </Grid>
+
+                  <Grid item xs={1}>
+                    <Box sx={{ m: 0, p: 1, paddingRight: 0 }}>
+                      <Typography noWrap>{`${value.user_nm}`}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Box sx={{ m: 0, p: 1 }}>
+                      <Typography noWrap>{` ${value.user_id}`}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Box sx={{ m: 0, p: 1 }}>
+                      <Typography noWrap>{` ${value.user_pwd}`}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Box sx={{ m: 0, p: 1 }}>
+                      <Typography noWrap>{` ${value.user_local}`}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Box sx={{ m: 0, p: 1 }}>
+                      <Typography noWrap>{` ${value.latest}`}</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Box sx={{ m: 0, p: 1 }}>
+                      <Typography noWrap>{` ${value.auth_code}`}</Typography>
+                    </Box>
+                  </Grid>
+
+                  <Divider orientation="vertical" />
+                  <IconButton
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => {
+                      handleOpen(value);
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => {
+                      handleDeleteDialogOpen(value);
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Grid>
               </ListItem>
             </Box>
           ))}

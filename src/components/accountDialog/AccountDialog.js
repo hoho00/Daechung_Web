@@ -25,7 +25,7 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
     setUpdateUserInfo(data);
     setCheckDuplicate(false);
     return () => {
-      checkDuplicate(false);
+      setCheckDuplicate(false);
     };
   }, []);
   useEffect(() => {
