@@ -22,7 +22,6 @@ const CreateDialog = ({ open, onClose }) => {
     const s = await axios.get(`
       /user/check/id/${checking}
       `);
-    console.log("status : ", s.data);
     if (s.data.exist) {
       alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
     } else {
@@ -147,7 +146,7 @@ const CreateDialog = ({ open, onClose }) => {
             variant="text"
             color="error"
             onClick={async () => {
-              console.log(await checkDuplicateId(createUserInfo.user_id));
+              await checkDuplicateId(createUserInfo.user_id);
               //setCheckDuplicate(true);
             }}
           >
@@ -170,7 +169,6 @@ const CreateDialog = ({ open, onClose }) => {
         <Button
           color="success"
           onClick={() => {
-            console.log(createUserInfo);
             register();
           }}
         >

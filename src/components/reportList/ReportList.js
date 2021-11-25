@@ -25,9 +25,6 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
     setOpenDialog(false);
   };
   useEffect(() => {
-    console.log("map clusterer select : ", clustererSelection);
-    //setSearchResult(clustererSelection);
-    //setClustererSelected(clustererSelection);
     const selected = [];
     for (var i = 0; i < clustererSelection.length; i++) {
       for (var j = 0; j < searchResult.length; j++) {
@@ -36,18 +33,14 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
         }
       }
     }
-    console.log("selected : ", selected);
-    //setSearchResult(selected);
     setListUp(selected);
   }, [clustererSelection]);
 
   const handleOpen = (report) => {
-    console.log("dialog report : ", report);
     setSelectedForDialog(report);
     axios
       .get(`/picture/report/id/${selectedForDialog.rp_id}`)
       .then((e) => {
-        //console.log(e.data.image_files);
         if (e.data.image_files) {
           const loaded = e.data.image_files.map((e) => {
             return `data:image/png;base64,${e.file}`;
@@ -58,14 +51,12 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
         }
       })
       .then(() => {
-        //makeImageSwiper();
         setTimeout(() => {
           setOpenDialog(true);
         }, 500);
       });
   };
   useEffect(() => {
-    console.log("lists : ", searchResult);
     setListUp(searchResult);
   }, [searchResult]);
 
@@ -74,7 +65,6 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
       await axios
         .get(`/picture/report/id/${selectedForDialog.rp_id}`)
         .then((e) => {
-          //console.log(e.data.image_files);
           if (e.data.image_files) {
             const loaded = e.data.image_files.map((e) => {
               return `data:image/png;base64,${e.file}`;
@@ -110,7 +100,6 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
                 key={value.rp_id}
                 onClick={() => {
                   handleOpen(value);
-                  console.log("hi", value.rp_id);
                 }}
                 divider={true}
               >

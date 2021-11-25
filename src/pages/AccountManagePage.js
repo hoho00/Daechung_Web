@@ -24,12 +24,10 @@ const AccountManagePage = () => {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const handleOpen = (user) => {
-    console.log("open", user);
     setSelectedUser(user);
     setOpen(true);
   };
   const handleDeleteDialogOpen = (user) => {
-    console.log("delete open", user);
     setSelectedUser(user);
     setDeleteDialogOpen(true);
   };
@@ -50,12 +48,10 @@ const AccountManagePage = () => {
   const getUsers = async () => {
     await axios.get("/user").then((e) => {
       setUsers(e.data.data);
-      console.log("account : ", e.data.data);
     });
   };
   useEffect(() => {
     getUsers();
-    console.log(users);
   }, []);
   return (
     <Box style={{ height: "70vh" }}>

@@ -18,17 +18,13 @@ const DeleteDialog = ({ open, onClose, updateUser, data, key }) => {
   });
 
   useEffect(() => {
-    console.log(data);
     setDeleteUserInfo(data);
   }, []);
   useEffect(() => {
-    console.log(data);
     setDeleteUserInfo(data);
   }, [data]);
 
   const deleteUser = (userInfo) => {
-    console.log("deleting : ", userInfo);
-
     axios
       .post(
         "/user/delete",

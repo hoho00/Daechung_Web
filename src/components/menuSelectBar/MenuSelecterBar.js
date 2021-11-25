@@ -10,7 +10,6 @@ const MenuSelecterBar = (props) => {
   const history = useHistory();
 
   const handleChange = (event, newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
 

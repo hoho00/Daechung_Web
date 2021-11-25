@@ -34,7 +34,6 @@ const MapPage = () => {
         search_end_date: date.format(endDay, "YYYY/MM/DD 23:59"),
       });
     }
-    console.log(searchResult);
     axios
       .post("/report/search", searchResult, {
         headers: {
@@ -47,41 +46,29 @@ const MapPage = () => {
   };
   useEffect(() => {
     getReports();
-    console.log("default search result no array: ", searchResult);
   }, []);
 
   useEffect(() => {
     getReports();
-    console.log("default search result : ", searchResult);
   }, [searchResult]);
 
   useEffect(() => {
-    //getReports();
-    console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_local: local_ });
   }, [local_]);
 
   useEffect(() => {
-    //getReports();
-    console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_type: type_ });
   }, [type_]);
 
   useEffect(() => {
-    //getReports();
-    console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_start_date: startDate_ });
   }, [startDate_]);
 
   useEffect(() => {
-    //getReports();
-    console.log(local_, type_, startDate_, endDate_);
     setSearchResult({ ...searchResult, search_end_date: endDate_ });
   }, [endDate_]);
 
-  useEffect(() => {
-    console.log("clusterer : ", cluster);
-  }, [cluster]);
+  useEffect(() => {}, [cluster]);
 
   return (
     <>
@@ -111,7 +98,11 @@ const MapPage = () => {
           <Box style={{ height: "100%" }}>
             <ReportList searchResult={reports} clustererSelection={cluster} />
           </Box>
-          <Map searchResult={reports} clustererSelection={setCluster} searchType={searchResult} />
+          <Map
+            searchResult={reports}
+            clustererSelection={setCluster}
+            searchType={searchResult}
+          />
         </Box>
       </Box>
     </>

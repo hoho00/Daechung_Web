@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 const Map = ({ searchResult, clustererSelection, searchType }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    console.log("map : ", searchResult);
     const container = document.getElementById("map");
     const options = {
       center: new kakao.maps.LatLng(36.414685, 127.559674),
@@ -63,24 +62,17 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         clusterer,
         "clusterclick",
         function (cluster) {
-          //console.log(cluster.getMarkers());
-
           const l = cluster.getMarkers().map((e) => {
-            //console.log(e.Gb);
             return Number(e.Gb);
           });
-          //console.log(l.length);
           clustererSelection(l);
-
-          cluster.getMarkers().map((e) => console.log(e.Gb));
           var level = map.getLevel() - 1;
 
           // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
           map.setLevel(level, { anchor: cluster.getCenter() });
         }
       );
-    }
-    else if (searchType.search_type === "녹조") {
+    } else if (searchType.search_type === "녹조") {
       var clustererGreenAlgae = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -90,43 +82,49 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         calculator: [10, 30, 50],
         //texts: ["방치 쓰레기"], // texts는 ['삐약', '꼬꼬', '꼬끼오', '치멘'] 이렇게 배열로도 설정할 수 있다
         disableClickZoom: true,
-        styles: [{ // calculator 각 사이 값 마다 적용될 스타일을 지정한다
-          width: '40px', height: '40px',
-          background: 'rgba(87, 173, 0, .8)',
-          borderRadius: '20px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '41px'
-        },
-        {
-          width: '50px', height: '50px',
-          background: 'rgba(87, 173, 0, .8)',
-          borderRadius: '25px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '51px'
-        },
-        {
-          width: '60px', height: '60px',
-          background: 'rgba(87, 173, 0, .8)',
-          borderRadius: '30px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '61px'
-        },
-        {
-          width: '80px', height: '80px',
-          background: 'rgba(87, 173, 0, .8)',
-          borderRadius: '40px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '81px'
-        }
-        ]
+        styles: [
+          {
+            // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+            width: "40px",
+            height: "40px",
+            background: "rgba(87, 173, 0, .8)",
+            borderRadius: "20px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "41px",
+          },
+          {
+            width: "50px",
+            height: "50px",
+            background: "rgba(87, 173, 0, .8)",
+            borderRadius: "25px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "51px",
+          },
+          {
+            width: "60px",
+            height: "60px",
+            background: "rgba(87, 173, 0, .8)",
+            borderRadius: "30px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "61px",
+          },
+          {
+            width: "80px",
+            height: "80px",
+            background: "rgba(87, 173, 0, .8)",
+            borderRadius: "40px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "81px",
+          },
+        ],
       });
       var markersGreenAlgae = searchResult.map((e) => {
         if (e.rp_type === "녹조") {
@@ -174,67 +172,66 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         clustererGreenAlgae,
         "clusterclick",
         function (cluster) {
-          //console.log(cluster.getMarkers());
-
           const l = cluster.getMarkers().map((e) => {
-            //console.log(e.Gb);
             return Number(e.Gb);
           });
-          //console.log(l.length);
           clustererSelection(l);
-
-          cluster.getMarkers().map((e) => console.log(e.Gb));
           var level = map.getLevel() - 1;
 
           // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
           map.setLevel(level, { anchor: cluster.getCenter() });
         }
       );
-    }
-    else if (searchType.search_type === "부유물") {
+    } else if (searchType.search_type === "부유물") {
       var clustererFloatingMatters = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
         minLevel: 5, // 클러스터 할 최소 지도 레벨
         //texts: ["부유물"], // texts는 ['삐약', '꼬꼬', '꼬끼오', '치멘'] 이렇게 배열로도 설정할 수 있다
         disableClickZoom: true,
-        styles: [{ // calculator 각 사이 값 마다 적용될 스타일을 지정한다
-          width: '40px', height: '40px',
-          background: 'rgba(165, 120, 57, .8)',
-          borderRadius: '20px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '41px'
-        },
-        {
-          width: '50px', height: '50px',
-          background: 'rgba(165, 120, 57, .8)',
-          borderRadius: '25px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '51px'
-        },
-        {
-          width: '60px', height: '60px',
-          background: 'rgba(165, 120, 57, .8)',
-          borderRadius: '30px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '61px'
-        },
-        {
-          width: '80px', height: '80px',
-          background: 'rgba(165, 120, 57, .8)',
-          borderRadius: '40px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '81px'
-        }
-        ]
+        styles: [
+          {
+            // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+            width: "40px",
+            height: "40px",
+            background: "rgba(165, 120, 57, .8)",
+            borderRadius: "20px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "41px",
+          },
+          {
+            width: "50px",
+            height: "50px",
+            background: "rgba(165, 120, 57, .8)",
+            borderRadius: "25px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "51px",
+          },
+          {
+            width: "60px",
+            height: "60px",
+            background: "rgba(165, 120, 57, .8)",
+            borderRadius: "30px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "61px",
+          },
+          {
+            width: "80px",
+            height: "80px",
+            background: "rgba(165, 120, 57, .8)",
+            borderRadius: "40px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "81px",
+          },
+        ],
       });
 
       var markersFloatingMatters = searchResult.map((e) => {
@@ -283,24 +280,17 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         clustererFloatingMatters,
         "clusterclick",
         function (cluster) {
-          //console.log(cluster.getMarkers());
-
           const l = cluster.getMarkers().map((e) => {
-            //console.log(e.Gb);
             return Number(e.Gb);
           });
-          //console.log(l.length);
           clustererSelection(l);
-
-          cluster.getMarkers().map((e) => console.log(e.Gb));
           var level = map.getLevel() - 1;
 
           // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
           map.setLevel(level, { anchor: cluster.getCenter() });
         }
       );
-    }
-    else if (searchType.search_type === "방치 쓰레기") {
+    } else if (searchType.search_type === "방치 쓰레기") {
       var clustererTrash = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -308,43 +298,49 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         calculator: [10, 30, 50],
         //texts: ["방치 쓰레기"], // texts는 ['삐약', '꼬꼬', '꼬끼오', '치멘'] 이렇게 배열로도 설정할 수 있다
         disableClickZoom: true,
-        styles: [{ // calculator 각 사이 값 마다 적용될 스타일을 지정한다
-          width: '40px', height: '40px',
-          background: 'rgba(255, 147, 0, .8)',
-          borderRadius: '20px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '41px'
-        },
-        {
-          width: '50px', height: '50px',
-          background: 'rgba(255, 147, 0, .8)',
-          borderRadius: '25px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '51px'
-        },
-        {
-          width: '60px', height: '60px',
-          background: 'rgba(255, 147, 0, .8)',
-          borderRadius: '30px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '61px'
-        },
-        {
-          width: '80px', height: '80px',
-          background: 'rgba(255, 147, 0, .8)',
-          borderRadius: '40px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '81px'
-        }
-        ]
+        styles: [
+          {
+            // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+            width: "40px",
+            height: "40px",
+            background: "rgba(255, 147, 0, .8)",
+            borderRadius: "20px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "41px",
+          },
+          {
+            width: "50px",
+            height: "50px",
+            background: "rgba(255, 147, 0, .8)",
+            borderRadius: "25px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "51px",
+          },
+          {
+            width: "60px",
+            height: "60px",
+            background: "rgba(255, 147, 0, .8)",
+            borderRadius: "30px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "61px",
+          },
+          {
+            width: "80px",
+            height: "80px",
+            background: "rgba(255, 147, 0, .8)",
+            borderRadius: "40px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "81px",
+          },
+        ],
       });
       var markersTrash = searchResult.map((e) => {
         if (e.rp_type === "방치 쓰레기") {
@@ -392,24 +388,16 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         clustererTrash,
         "clusterclick",
         function (cluster) {
-          //console.log(cluster.getMarkers());
-
           const l = cluster.getMarkers().map((e) => {
-            //console.log(e.Gb);
             return Number(e.Gb);
           });
-          //console.log(l.length);
           clustererSelection(l);
-
-          cluster.getMarkers().map((e) => console.log(e.Gb));
           var level = map.getLevel() - 1;
-
           // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
           map.setLevel(level, { anchor: cluster.getCenter() });
         }
       );
-    }
-    else if (searchType.search_type === "낚시/행랑객 계도") {
+    } else if (searchType.search_type === "낚시/행랑객 계도") {
       var clustererFishing = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -419,43 +407,49 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         calculator: [10, 30, 50],
         //texts: ["방치 쓰레기"], // texts는 ['삐약', '꼬꼬', '꼬끼오', '치멘'] 이렇게 배열로도 설정할 수 있다
         disableClickZoom: true,
-        styles: [{ // calculator 각 사이 값 마다 적용될 스타일을 지정한다
-          width: '40px', height: '40px',
-          background: 'rgba(0, 150, 249, .8)',
-          borderRadius: '20px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '41px'
-        },
-        {
-          width: '50px', height: '50px',
-          background: 'rgba(0, 150, 249, .8)',
-          borderRadius: '25px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '51px'
-        },
-        {
-          width: '60px', height: '60px',
-          background: 'rgba(0, 150, 249, .8)',
-          borderRadius: '30px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '61px'
-        },
-        {
-          width: '80px', height: '80px',
-          background: 'rgba(0, 150, 249, .8)',
-          borderRadius: '40px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '81px'
-        }
-        ]
+        styles: [
+          {
+            // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+            width: "40px",
+            height: "40px",
+            background: "rgba(0, 150, 249, .8)",
+            borderRadius: "20px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "41px",
+          },
+          {
+            width: "50px",
+            height: "50px",
+            background: "rgba(0, 150, 249, .8)",
+            borderRadius: "25px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "51px",
+          },
+          {
+            width: "60px",
+            height: "60px",
+            background: "rgba(0, 150, 249, .8)",
+            borderRadius: "30px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "61px",
+          },
+          {
+            width: "80px",
+            height: "80px",
+            background: "rgba(0, 150, 249, .8)",
+            borderRadius: "40px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "81px",
+          },
+        ],
       });
       var markersFishing = searchResult.map((e) => {
         if (e.rp_type === "낚시/행랑객 계도") {
@@ -503,13 +497,9 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         clustererFishing,
         "clusterclick",
         function (cluster) {
-          //console.log(cluster.getMarkers());
-
           const l = cluster.getMarkers().map((e) => {
-            //console.log(e.Gb);
             return Number(e.Gb);
           });
-          //console.log(l.length);
           clustererSelection(l);
           var level = map.getLevel() - 1;
 
@@ -517,8 +507,7 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
           map.setLevel(level, { anchor: cluster.getCenter() });
         }
       );
-    }
-    else if (searchType.search_type === "기타사항") {
+    } else if (searchType.search_type === "기타사항") {
       var clustererEtc = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -528,43 +517,49 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         calculator: [10, 30, 50],
         //texts: ["방치 쓰레기"], // texts는 ['삐약', '꼬꼬', '꼬끼오', '치멘'] 이렇게 배열로도 설정할 수 있다
         disableClickZoom: true,
-        styles: [{ // calculator 각 사이 값 마다 적용될 스타일을 지정한다
-          width: '40px', height: '40px',
-          background: 'rgba(97, 95, 95, .8)',
-          borderRadius: '20px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '41px'
-        },
-        {
-          width: '50px', height: '50px',
-          background: 'rgba(97, 95, 95, .8)',
-          borderRadius: '25px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '51px'
-        },
-        {
-          width: '60px', height: '60px',
-          background: 'rgba(97, 95, 95, .8)',
-          borderRadius: '30px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '61px'
-        },
-        {
-          width: '80px', height: '80px',
-          background: 'rgba(97, 95, 95, .8)',
-          borderRadius: '40px',
-          color: '#000',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          lineHeight: '81px'
-        }
-        ]
+        styles: [
+          {
+            // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+            width: "40px",
+            height: "40px",
+            background: "rgba(97, 95, 95, .8)",
+            borderRadius: "20px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "41px",
+          },
+          {
+            width: "50px",
+            height: "50px",
+            background: "rgba(97, 95, 95, .8)",
+            borderRadius: "25px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "51px",
+          },
+          {
+            width: "60px",
+            height: "60px",
+            background: "rgba(97, 95, 95, .8)",
+            borderRadius: "30px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "61px",
+          },
+          {
+            width: "80px",
+            height: "80px",
+            background: "rgba(97, 95, 95, .8)",
+            borderRadius: "40px",
+            color: "#000",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "81px",
+          },
+        ],
       });
       var markersEtc = searchResult.map((e) => {
         if (e.rp_type === "기타사항") {
@@ -612,16 +607,10 @@ const Map = ({ searchResult, clustererSelection, searchType }) => {
         clustererEtc,
         "clusterclick",
         function (cluster) {
-          //console.log(cluster.getMarkers());
-
           const l = cluster.getMarkers().map((e) => {
-            //console.log(e.Gb);
             return Number(e.Gb);
           });
-          //console.log(l.length);
           clustererSelection(l);
-
-          cluster.getMarkers().map((e) => console.log(e.Gb));
           var level = map.getLevel() - 1;
 
           // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다

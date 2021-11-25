@@ -22,7 +22,6 @@ const DateSearchingEnd = ({ settingEnd }) => {
           value={endDate}
           onChange={(newValue) => {
             setEndDate(newValue);
-            console.log(newValue);
             settingEnd(date.format(newValue, "YYYY/MM/DD 23:59"));
           }}
           renderInput={({ inputRef, inputProps, InputProps }) => (

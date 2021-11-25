@@ -40,7 +40,6 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
     setCheckDuplicate(false);
   }, [open]);
   const checkDuplicateId = async (checking) => {
-    console.log(checking, data.user_id);
     if (checking === data.user_id) {
       alert("중복체크 완료, 사용가능한 아이디 입니다.");
       setCheckDuplicate(true);
@@ -49,7 +48,6 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
       const s = await axios.get(`
       /user/check/id/${checking}
       `);
-      console.log("status : ", s.data);
       if (s.data.exist) {
         alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
       } else {
@@ -63,11 +61,8 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
     if (!checkDuplicate) {
       alert("아이디 중복 체크를 해 주세요.");
     } else {
-      console.log("updating : ", userInfo);
       if (userInfo.user_pwd === "") {
         userInfo.user_pwd = user.user_pwd;
-        console.log(user);
-        console.log("onchange test : ", userInfo.user_pwd);
       }
 
       axios
@@ -163,8 +158,7 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
             variant="text"
             color="error"
             onClick={async () => {
-              console.log(await checkDuplicateId(updateUserInfo.user_id));
-              //setCheckDuplicate(true);
+              await checkDuplicateId(updateUserInfo.user_id);
             }}
           >
             아이디 중복확인

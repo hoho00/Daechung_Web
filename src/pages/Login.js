@@ -29,10 +29,8 @@ const Login = () => {
 
   useEffect(() => {
     axios.get("/user").then((e) => {
-      //console.log(e.data.data);
       e.data.data.map((e) => {
         if (e.user_seq === 999) {
-          //console.log("id", e.user_id, "pwd", e.user_pwd);
           setAdminId(e.user_id);
           setAdminPwd(e.user_pwd);
         }

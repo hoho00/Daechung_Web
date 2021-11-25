@@ -201,10 +201,6 @@ function Table({ columns, data, download }) {
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
   const firstPageRows = rows;
-  //setPageSize(10);
-  // rows.forEach(element => {
-  //   console.log(element.original);
-  // });
   download(rows);
 
   return (
@@ -291,7 +287,6 @@ const DataOrganizePage = () => {
     const f = downloadRows.map((e) => {
       return e.original;
     });
-    console.log("oh : ", f);
     setDownloadFileData(f);
   };
 
@@ -312,18 +307,15 @@ const DataOrganizePage = () => {
         }
       )
       .then((e) => {
-        console.log("data", e.data.data);
         setReports(e.data.data);
       });
   };
   useEffect(() => {
     getReports();
-    //console.log("excel files : ",downloadRows);
   }, []);
 
   useEffect(() => {
     setterData();
-    console.log("files : ", downloadFileData);
   }, [downloadRows]);
 
   const columns = React.useMemo(
