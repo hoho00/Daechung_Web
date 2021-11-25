@@ -74,11 +74,11 @@ const AccountManagePage = () => {
               <Typography noWrap>{`아이디`}</Typography>
             </Box>
           </Grid>
-          <Grid item xs={2}>
+          {/* <Grid item xs={2}>
             <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
               <Typography noWrap>{`비밀번호`}</Typography>
             </Box>
-          </Grid>
+          </Grid> */}
           <Grid item xs={1}>
             <Box sx={{ m: 0, p: 1, borderLeft: 1 }}>
               <Typography noWrap>{`권역`}</Typography>
@@ -127,11 +127,11 @@ const AccountManagePage = () => {
                       <Typography noWrap>{` ${value.user_id}`}</Typography>
                     </Box>
                   </Grid>
-                  <Grid item xs={2}>
+                  {/* <Grid item xs={2}>
                     <Box sx={{ m: 0, p: 1 }}>
                       <Typography noWrap>{` ${value.user_pwd}`}</Typography>
                     </Box>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={1}>
                     <Box sx={{ m: 0, p: 1 }}>
                       <Typography noWrap>{` ${value.user_local}`}</Typography>

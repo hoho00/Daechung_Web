@@ -56,7 +56,7 @@ const DeleteDialog = ({ open, onClose, updateUser, data, key }) => {
           {`삭제한 정보는 다시 복구 할 수 없습니다.`}
         </DialogContentText>
         <DialogContentText id="alert-dialog-description">
-          {`아이디 : ${data.user_id}, 비밀번호 : ${data.user_pwd}, 권역 : ${data.user_local}`}
+          {`이름 : ${data.user_nm}, 아이디 : ${data.user_id}, 권역 : ${data.user_local}`}
         </DialogContentText>
       </DialogContent>
       <DialogActions>

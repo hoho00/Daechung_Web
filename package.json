@@ -31,6 +31,7 @@
     "react-table": "^7.7.0",
     "react-window": "^1.8.6",
     "reactstrap": "^8.10.0",
+    "sha256": "^0.2.0",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2",
     "xlsx": "^0.17.2",
@@ -60,7 +61,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://127.0.0.1:8000/",
+  "proxy": "https://hohodev.ml",
   "secure": false,
   "devDependencies": {
     "prettier": "^2.4.0"

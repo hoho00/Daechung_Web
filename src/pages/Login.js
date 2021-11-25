@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import sha256 from "sha256";
 
 const Login = () => {
   const [adminId, setAdminId] = useState("");
@@ -9,7 +10,7 @@ const Login = () => {
   const [inputId, setInputId] = useState("");
   const [inputPwd, setInputPwd] = useState("");
   const loginAdmin = () => {
-    if (adminId === inputId && adminPwd === inputPwd) {
+    if (adminId === inputId && adminPwd === sha256(inputPwd)) {
       //alert("로그인 성공!!");
       history.push({
         pathname: "/home/map_page",
@@ -31,7 +32,7 @@ const Login = () => {
       //console.log(e.data.data);
       e.data.data.map((e) => {
         if (e.user_seq === 999) {
-          console.log("id", e.user_id, "pwd", e.user_pwd);
+          //console.log("id", e.user_id, "pwd", e.user_pwd);
           setAdminId(e.user_id);
           setAdminPwd(e.user_pwd);
         }

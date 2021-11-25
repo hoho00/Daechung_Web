@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
+import sha256 from "sha256";
 
 const CreateDialog = ({ open, onClose }) => {
   const [checkDuplicate, setCheckDuplicate] = useState(false);
@@ -111,13 +112,13 @@ const CreateDialog = ({ open, onClose }) => {
           margin="normal"
           id="user_pwd"
           label="비밀번호"
-          type="string"
+          type="password"
           fullWidth
           //defaultValue={user.user_pwd}
           onChange={(e) =>
             setCreateUserInfo({
               ...createUserInfo,
-              user_pwd: e.target.value,
+              user_pwd: sha256(e.target.value),
             })
           }
         />

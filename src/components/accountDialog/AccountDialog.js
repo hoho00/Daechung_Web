@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import React from "react";
 import { Box } from "@mui/system";
+import sha256 from "sha256";
 
 const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
   const [checkDuplicate, setCheckDuplicate] = useState(false);
@@ -29,7 +30,7 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
     };
   }, []);
   useEffect(() => {
-    setUser(data);
+    //setUser(data);
     setUpdateUserInfo(data);
     setCheckDuplicate(false);
   }, [data]);
@@ -63,6 +64,12 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
       alert("아이디 중복 체크를 해 주세요.");
     } else {
       console.log("updating : ", userInfo);
+      if (userInfo.user_pwd === "") {
+        userInfo.user_pwd = user.user_pwd;
+        console.log(user);
+        console.log("onchange test : ", userInfo.user_pwd);
+      }
+
       axios
         .post("/user/update", userInfo, {
           headers: {
@@ -120,14 +127,14 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
           autoFocus
           margin="normal"
           id="user_pwd"
-          label="비밀번호"
-          type="string"
+          label="비밀번호 (변경하지 않으실거면 공란으로 두세요)"
+          type="password"
           fullWidth
-          defaultValue={user.user_pwd}
+          defaultValue={""}
           onChange={(e) =>
             setUpdateUserInfo({
               ...updateUserInfo,
-              user_pwd: e.target.value,
+              user_pwd: sha256(e.target.value),
             })
           }
         />
