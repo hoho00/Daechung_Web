@@ -35,11 +35,11 @@ const Type = ({ setting }) => {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem value="전체">전체</MenuItem>
-          <MenuItem value={"녹조"}>녹조</MenuItem>
-          <MenuItem value={"부유물"}>부유물</MenuItem>
-          <MenuItem value={"방치 쓰레기"}>방치 쓰레기</MenuItem>
-          <MenuItem value={"낚시/행랑객 계도"}>낚시/행랑객 계도</MenuItem>
-          <MenuItem value={"기타사항"}>기타사항</MenuItem>
+          <MenuItem value={"녹조"}>🟢 녹조</MenuItem>
+          <MenuItem value={"부유물"}>🔴 부유물</MenuItem>
+          <MenuItem value={"방치 쓰레기"}>🟠 방치 쓰레기</MenuItem>
+          <MenuItem value={"낚시/행랑객 계도"}>🔵 낚시/행랑객 계도</MenuItem>
+          <MenuItem value={"기타사항"}>⚪ 기타사항</MenuItem>
         </Select>
       </FormControl>
     </div>
