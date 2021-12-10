@@ -293,7 +293,7 @@ const DataOrganizePage = () => {
   const getReports = () => {
     axios
       .post(
-        "/report/search",
+        "http://database:8000/report/search",
         {
           search_type: "전체",
           search_start_date: "2000/01/01",

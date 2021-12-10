@@ -35,7 +35,7 @@ const MapPage = () => {
       });
     }
     axios
-      .post("/report/search", searchResult, {
+      .post("http://database:8000/report/search", searchResult, {
         headers: {
           "content-type": "text/plain",
         },

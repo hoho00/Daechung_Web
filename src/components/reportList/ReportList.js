@@ -39,7 +39,7 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
   const handleOpen = (report) => {
     setSelectedForDialog(report);
     axios
-      .get(`/picture/report/id/${selectedForDialog.rp_id}`)
+      .get(`http://database:8000/picture/report/id/${selectedForDialog.rp_id}`)
       .then((e) => {
         if (e.data.image_files) {
           const loaded = e.data.image_files.map((e) => {
@@ -63,7 +63,9 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
   useEffect(() => {
     const f = async () => {
       await axios
-        .get(`/picture/report/id/${selectedForDialog.rp_id}`)
+        .get(
+          `http://database:8000/picture/report/id/${selectedForDialog.rp_id}`
+        )
         .then((e) => {
           if (e.data.image_files) {
             const loaded = e.data.image_files.map((e) => {

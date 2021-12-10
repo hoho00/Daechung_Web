@@ -46,7 +46,7 @@ const AccountManagePage = () => {
 
   const [users, setUsers] = useState([]);
   const getUsers = async () => {
-    await axios.get("/user").then((e) => {
+    await axios.get("http://database:8000/user").then((e) => {
       setUsers(e.data.data);
     });
   };
