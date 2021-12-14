@@ -1,8 +1,12 @@
 FROM node:14.15.1-alpine3.12
 
 RUN npm install -g serve
+RUN apk update
+RUN apk add git
 
-RUN mkdir ./build
-COPY ./build ./build
+COPY . .
 
-ENTRYPOINT ["serve", "-n",  "build"]
+RUN npm i
+
+
+CMD ["npm", "start"]

@@ -61,7 +61,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://hohodev.ml",
+  "proxy": "http://backend:8000",
   "secure": false,
   "devDependencies": {
     "prettier": "^2.4.0"
