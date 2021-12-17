@@ -5,8 +5,14 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import { Typography } from "@material-ui/core";
+import DownloadIcon from "@mui/icons-material/Download";
+import base64Img from "base64-img";
+import Jimp from "jimp";
+import fs from "browserify-fs";
+import { useHistory } from "react-router-dom";
 
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogContentText,
@@ -14,12 +20,15 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import "react-alice-carousel/lib/alice-carousel.css";
+import { fontWeight } from "@mui/system";
 
 const RepoprtList = ({ searchResult, clustererSelection }) => {
+  const history = useHistory();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedForDialog, setSelectedForDialog] = useState({});
   const [images, setImages] = useState([]);
   const [listUp, setListUp] = useState([]);
+  const [fileDownloadURL, setFileDownloadURL] = useState([]);
   const handleClose = () => {
     setImages([]);
     setOpenDialog(false);
@@ -77,6 +86,13 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
     };
     f();
   }, [selectedForDialog]);
+  const toDownloadPage = (urls) => {
+    console.log("test", urls);
+    history.push({
+      pathname: "/DownloadImagePage",
+      state: { urls: urls },
+    });
+  };
 
   return (
     <>
@@ -155,6 +171,30 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
             </DialogContentText>
           </DialogContent>
         </Box>
+        <Button
+          onClick={() => {
+            let output = "";
+            console.log(selectedForDialog);
+            axios
+              .get(`/picture/report/id/${selectedForDialog.rp_id}`)
+              .then((e) => {
+                console.log(e.data.image_files);
+                const fileDownloadUrls = e.data.image_files.map((img) => {
+                  console.log(img.file);
+                  output = img.file;
+                  const blob = new Blob([output]);
+                  const fileDownloadUrl = URL.createObjectURL(blob);
+                  //setFileDownloadURL([...fileDownloadURL, fileDownloadUrl]);
+                  return fileDownloadUrl;
+                });
+                console.log("url : ", fileDownloadUrls);
+                toDownloadPage(fileDownloadUrls);
+              });
+          }}
+        >
+          prepare download images
+          <DownloadIcon />
+        </Button>
       </Dialog>
     </>
   );
