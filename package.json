@@ -14,10 +14,13 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
+    "base64-img": "^1.0.4",
+    "browserify-fs": "^1.0.0",
     "classname": "0.0.0",
     "cross-env": "^7.0.3",
     "date-and-time": "^2.0.0",
     "date-fns": "^2.24.0",
+    "jimp": "^0.16.1",
     "match-sorter": "^6.3.1",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.5.1",
@@ -61,7 +64,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://backend:8000",
+  "proxy": "https://hohodev.ml",
   "secure": false,
   "devDependencies": {
     "prettier": "^2.4.0"
