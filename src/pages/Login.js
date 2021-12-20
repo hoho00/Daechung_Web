@@ -28,7 +28,7 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-    axios.get(process.env.REACT_API_HOST + "/user").then((e) => {
+    axios.get(process.env.REACT_APP_API_HOST + "/user").then((e) => {
       e.data.data.map((e) => {
         if (e.user_seq === 999) {
           setAdminId(e.user_id);

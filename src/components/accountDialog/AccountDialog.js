@@ -46,7 +46,7 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
       return true;
     } else {
       const s = await axios.get(
-        process.env.REACT_API_HOST +
+        process.env.REACT_APP_API_HOST +
           `
       /user/check/id/${checking}
       `
@@ -69,7 +69,7 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
       }
 
       axios
-        .post("/user/update", userInfo, {
+        .post(process.env.REACT_APP_API_HOST + "/user/update", userInfo, {
           headers: {
             "content-type": "text/plain",
           },

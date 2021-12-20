@@ -293,7 +293,7 @@ const DataOrganizePage = () => {
   const getReports = () => {
     axios
       .post(
-        process.env.REACT_API_HOST + "/report/search",
+        process.env.REACT_APP_API_HOST + "/report/search",
         {
           search_type: "전체",
           search_start_date: "2000/01/01",

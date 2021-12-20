@@ -20,7 +20,7 @@ const CreateDialog = ({ open, onClose }) => {
   });
   const checkDuplicateId = async (checking) => {
     const s = await axios.get(
-      process.env.REACT_API_HOST +
+      process.env.REACT_APP_API_HOST +
         `
       /user/check/id/${checking}
       `
@@ -45,7 +45,7 @@ const CreateDialog = ({ open, onClose }) => {
     } else {
       await axios
         .post(
-          process.env.REACT_API_HOST + "/user/register",
+          process.env.REACT_APP_API_HOST + "/user/register",
           {
             user_id: createUserInfo.user_id,
             user_pwd: createUserInfo.user_pwd,

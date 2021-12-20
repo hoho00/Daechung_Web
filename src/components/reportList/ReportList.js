@@ -43,7 +43,7 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
     setSelectedForDialog(report);
     axios
       .get(
-        process.env.REACT_API_HOST +
+        process.env.REACT_APP_API_HOST +
           `/picture/report/id/${selectedForDialog.rp_id}`
       )
       .then((e) => {
@@ -70,7 +70,7 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
     const f = async () => {
       await axios
         .get(
-          process.env.REACT_API_HOST +
+          process.env.REACT_APP_API_HOST +
             `/picture/report/id/${selectedForDialog.rp_id}`
         )
         .then((e) => {
@@ -186,7 +186,7 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
               selectedForDialog.rp_add;
             axios
               .get(
-                process.env.REACT_API_HOST +
+                process.env.REACT_APP_API_HOST +
                   `/picture/report/id/${selectedForDialog.rp_id}`
               )
               .then((e) => {

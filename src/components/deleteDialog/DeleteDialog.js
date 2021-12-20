@@ -27,7 +27,7 @@ const DeleteDialog = ({ open, onClose, updateUser, data, key }) => {
   const deleteUser = (userInfo) => {
     axios
       .post(
-        process.env.REACT_API_HOST + "/user/delete",
+        process.env.REACT_APP_API_HOST + "/user/delete",
         {
           user_seq: userInfo.user_seq,
         },
