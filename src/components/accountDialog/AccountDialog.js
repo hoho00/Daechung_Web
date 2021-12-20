@@ -45,9 +45,12 @@ const AccountDialog = ({ open, onClose, updateUser, data, key }) => {
       setCheckDuplicate(true);
       return true;
     } else {
-      const s = await axios.get(`
+      const s = await axios.get(
+        process.env.REACT_API_HOST +
+          `
       /user/check/id/${checking}
-      `);
+      `
+      );
       if (s.data.exist) {
         alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
       } else {
