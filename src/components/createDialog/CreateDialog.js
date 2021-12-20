@@ -20,10 +20,7 @@ const CreateDialog = ({ open, onClose }) => {
   });
   const checkDuplicateId = async (checking) => {
     const s = await axios.get(
-      process.env.REACT_APP_API_HOST +
-        `
-      /user/check/id/${checking}
-      `
+      process.env.REACT_APP_API_HOST + `/user/check/id/${checking}`
     );
     if (s.data.exist) {
       alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
