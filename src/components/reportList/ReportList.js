@@ -5,10 +5,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import { Typography } from "@material-ui/core";
-import DownloadIcon from "@mui/icons-material/Download";
-import base64Img from "base64-img";
-import Jimp from "jimp";
-import fs from "browserify-fs";
 import { useHistory } from "react-router-dom";
 
 import {
@@ -19,8 +15,6 @@ import {
   DialogTitle,
 } from "@mui/material";
 import axios from "axios";
-import "react-alice-carousel/lib/alice-carousel.css";
-import { fontWeight } from "@mui/system";
 
 const RepoprtList = ({ searchResult, clustererSelection }) => {
   const history = useHistory();
@@ -56,7 +50,7 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
           });
           setImages(loaded);
         } else {
-          setImages([itemData[0]]);
+          setImages(["empty image"]);
         }
       })
       .then(() => {
@@ -80,17 +74,17 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
             });
             setImages(loaded);
           } else {
-            setImages([itemData[0]]);
+            setImages(["empty image"]);
           }
         });
     };
     f();
   }, [selectedForDialog]);
-  const toDownloadPage = (urls) => {
+  const toDownloadPage = (urls, title) => {
     console.log("test", urls);
     history.push({
       pathname: "/DownloadImagePage",
-      state: { urls: urls },
+      state: { urls: urls, title: title },
     });
   };
 
@@ -174,7 +168,16 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
         <Button
           onClick={() => {
             let output = "";
+            let imageTitle = "";
             console.log(selectedForDialog);
+            imageTitle +=
+              selectedForDialog.rp_date +
+              "_" +
+              selectedForDialog.rp_type +
+              "_" +
+              selectedForDialog.user_nm +
+              "_" +
+              selectedForDialog.rp_add;
             axios
               .get(`/picture/report/id/${selectedForDialog.rp_id}`)
               .then((e) => {
@@ -184,22 +187,18 @@ const RepoprtList = ({ searchResult, clustererSelection }) => {
                   output = img.file;
                   const blob = new Blob([output]);
                   const fileDownloadUrl = URL.createObjectURL(blob);
-                  //setFileDownloadURL([...fileDownloadURL, fileDownloadUrl]);
                   return fileDownloadUrl;
                 });
                 console.log("url : ", fileDownloadUrls);
-                toDownloadPage(fileDownloadUrls);
+                toDownloadPage(fileDownloadUrls, imageTitle);
               });
           }}
         >
           prepare download images
-          <DownloadIcon />
         </Button>
       </Dialog>
     </>
   );
 };
-
-const itemData = "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e";
 
 export default RepoprtList;
