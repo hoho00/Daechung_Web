@@ -35,7 +35,7 @@ const MapPage = () => {
       });
     }
     axios
-      .post("/report/search", searchResult, {
+      .post(process.env.REACT_APP_API_HOST + "/report/search", searchResult, {
         headers: {
           "content-type": "text/plain",
         },

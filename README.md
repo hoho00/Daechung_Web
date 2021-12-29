@@ -1,6 +1,7 @@
 # Pull and Before when you start app!!!
 !!This is very important
 ### `npm i`
+### `npm run build`
 
 
 

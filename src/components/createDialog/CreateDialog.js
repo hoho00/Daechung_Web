@@ -19,9 +19,9 @@ const CreateDialog = ({ open, onClose }) => {
     user_nm: "",
   });
   const checkDuplicateId = async (checking) => {
-    const s = await axios.get(`
-      /user/check/id/${checking}
-      `);
+    const s = await axios.get(
+      process.env.REACT_APP_API_HOST + `/user/check/id/${checking}`
+    );
     if (s.data.exist) {
       alert("중복된 아이디 입니다. 다른 아이디를 사용해 주세요.");
     } else {
@@ -42,7 +42,7 @@ const CreateDialog = ({ open, onClose }) => {
     } else {
       await axios
         .post(
-          "/user/register",
+          process.env.REACT_APP_API_HOST + "/user/register",
           {
             user_id: createUserInfo.user_id,
             user_pwd: createUserInfo.user_pwd,
